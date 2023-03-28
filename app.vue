@@ -32,9 +32,8 @@ useHead({
           </h1>
 
           <p>
-            I'm Oumar Barry.
-            Just a human passionate about building innovative solutions and being exposed to new challenges and
-            technologies.
+            I'm Oumar Barry. <br>
+            Just a human passionate about building innovative solutions and being exposed to new challenges and technologies.
           </p>
 
           <br />
@@ -76,7 +75,7 @@ useHead({
     <Plum />
 
     <footer class="w-screen bottom-0 py-5 text-sm text-gray-400 text-center">
-      &copy; 2022 Oumar Barry
+      &copy; 2023 Oumar Barry
     </footer>
   </div>
 </template>

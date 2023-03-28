@@ -32,7 +32,7 @@ useHead({
           </h1>
 
           <p>
-            I'm Oumar Barry. <br>
+            I'm Oumar Barry. <br> <br>
             Just a human passionate about building innovative solutions and being exposed to new challenges and technologies.
           </p>
 

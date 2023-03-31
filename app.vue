@@ -16,10 +16,18 @@ useHead({
         <Logo class="w-12 h-12 transition-all duration-150 ease-in-out hover:fill-gray-500" />
       </NuxtLink>
 
-      <NuxtLink to="https://github.com/oumarbarry" target="_blank">
-        <Icon name="carbon-logo-github" size="25px"
-          class="text-black transition-all duration-150 ease-in-out hover:text-gray-500" />
-      </NuxtLink>
+      <div class="flex items-center gap-x-8">
+        <NuxtLink
+          to="https://oumarbarry.notion.site/Oumar-Barry-4c46c1855f244f61b8f122837f19dda7"
+          target="_blank"
+          class="no-underline text-black transition-all duration-150 ease-in-out hover:text-gray-500">
+          Projects
+        </NuxtLink>
+
+        <NuxtLink to="https://github.com/oumarbarry" target="_blank">
+          <Icon name="carbon-logo-github" size="25px" class="text-black transition-all duration-150 ease-in-out hover:text-gray-500" />
+        </NuxtLink>
+      </div>
     </header>
 
     <main>

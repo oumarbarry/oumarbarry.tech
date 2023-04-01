@@ -9,14 +9,13 @@
     "lint": "eslint . --fix"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.29.4",
-    "@kevinmarrec/nuxt-pwa": "^0.10.0",
-    "@nuxt/image-edge": "1.0.0-27769790.4b27db3",
-    "@unocss/nuxt": "^0.46.3",
-    "@vueuse/core": "^9.4.0",
-    "@vueuse/nuxt": "^9.4.0",
-    "eslint": "^8.27.0",
-    "nuxt": "3.0.0-rc.13",
-    "nuxt-icon": "^0.1.7"
+    "@antfu/eslint-config": "^0.38.2",
+    "@kevinmarrec/nuxt-pwa": "^0.17.0",
+    "@nuxt/image-edge": "1.0.0-28004510.a0dc8e8",
+    "@unocss/nuxt": "^0.50.6",
+    "@vueuse/nuxt": "^9.13.0",
+    "eslint": "^8.37.0",
+    "nuxt": "3.3.2",
+    "nuxt-icon": "^0.3.3"
   }
 }

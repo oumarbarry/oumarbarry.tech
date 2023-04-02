@@ -18,12 +18,7 @@ const size = $ref(useWindowSize())
 const init = $ref(4)
 let startFn = $ref<Fn>(() => { })
 
-function initCanvas(
-  canvas: HTMLCanvasElement,
-  width = 450,
-  height = 450,
-  _dpi?: number
-) {
+function initCanvas(canvas: HTMLCanvasElement, width = 450, height = 450, _dpi?: number) {
   const ctx = canvas.getContext('2d')!
 
   const dpr = window.devicePixelRatio || 1
@@ -72,10 +67,10 @@ onMounted(async () => {
     const rad2 = rad - random() * r15
 
     if (
-      nx < -100 ||
-      nx > size.width + 100 ||
-      ny < -100 ||
-      ny > size.height + 100
+      nx < -100
+      || nx > size.width + 100
+      || ny < -100
+      || ny > size.height + 100
     )
       return
 
@@ -91,16 +86,18 @@ onMounted(async () => {
   let controls: ReturnType<typeof useRafFn>
 
   const frame = () => {
-    if (performance.now() - lastTime < interval) return
+    if (performance.now() - lastTime < interval)
+      return
 
     iterations += 1
     prevSteps = steps
     steps = []
     lastTime = performance.now()
 
-    if (!prevSteps.length) controls.pause()
+    if (!prevSteps.length)
+      controls.pause()
 
-    prevSteps.forEach((i) => i())
+    prevSteps.forEach(i => i())
   }
 
   controls = useRafFn(frame, { immediate: false })
@@ -118,7 +115,8 @@ onMounted(async () => {
       () => step(0, random() * size.height, 0),
       () => step(size.width, random() * size.height, r180),
     ]
-    if (size.width < 500) steps = steps.slice(0, 2)
+    if (size.width < 500)
+      steps = steps.slice(0, 2)
     controls.resume()
   }
 
@@ -129,8 +127,10 @@ const mask = computed(() => 'radial-gradient(circle, transparent, black);')
 </script>
 
 <template>
-  <div class="fixed top-0 bottom-0 left-0 right-0 pointer-events-none -z-1"
-    :style="`mask-image: ${mask}; --webkit-mask-image: ${mask};`">
+  <div
+    class="pointer-events-none fixed bottom-0 left-0 right-0 top-0 -z-1"
+    :style="`mask-image: ${mask}; --webkit-mask-image: ${mask};`"
+  >
     <canvas ref="el" width="450" height="450" />
   </div>
 </template>

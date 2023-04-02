@@ -1,9 +1,9 @@
 export default defineNuxtConfig({
   typescript: { shim: false },
 
-  experimental: { inlineSSRStyles: false, reactivityTransform: true  },
+  experimental: { inlineSSRStyles: false },
 
-  css: ['@unocss/reset/tailwind.css'],
+  // css: ['@unocss/reset/tailwind.css'],
 
   modules: [
     'nuxt-icon',
@@ -11,10 +11,11 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     '@nuxt/image-edge',
     '@kevinmarrec/nuxt-pwa',
+    '@vue-macros/nuxt',
   ],
 
   pwa: {
     manifest: { name: '' },
-    workbox: { enabled: false }
-  }
+    workbox: { enabled: false },
+  },
 })

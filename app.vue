@@ -1,26 +1,27 @@
 <script setup lang="ts">
 useHead({
-  title: "Oumar Barry's Boring Personal Website",
+  title: 'Oumar Barry\'s Boring Personal Website',
   script: [{
-    src: "https://oackeee.vercel.app/tracker.js",
-    "data-ackee-server": "https://oackeee.vercel.app",
-    "data-ackee-domain-id": "2a3d9283-90f7-40d6-a338-09b29e911707"
-  }]
+    'src': 'https://oackeee.vercel.app/tracker.js',
+    'data-ackee-server': 'https://oackeee.vercel.app',
+    'data-ackee-domain-id': '2a3d9283-90f7-40d6-a338-09b29e911707',
+  }],
 })
 </script>
 
 <template>
   <div class="min-h-screen">
-    <header class="flex justify-between items-center px-5 py-5 md:px-10 lg:px-30">
+    <header class="flex items-center justify-between px-5 py-5 lg:px-30 md:px-10">
       <NuxtLink to="/">
-        <Logo class="w-12 h-12 transition-all duration-150 ease-in-out hover:fill-gray-500" />
+        <Logo class="h-12 w-12 transition-all duration-150 ease-in-out hover:fill-gray-500" />
       </NuxtLink>
 
       <div class="flex items-center gap-x-8">
         <NuxtLink
           to="https://oumarbarry.notion.site/Oumar-Barry-4c46c1855f244f61b8f122837f19dda7"
           target="_blank"
-          class="no-underline text-black transition-all duration-150 ease-in-out hover:text-gray-500">
+          class="text-black no-underline transition-all duration-150 ease-in-out hover:text-gray-500"
+        >
           Projects
         </NuxtLink>
 
@@ -31,9 +32,8 @@ useHead({
     </header>
 
     <main>
-      <section class="grid grid-cols-1 2xl:grid-cols-2 gap-y-15 md:gap-y-20 xl:gap-x-30 px-6 py-15 md:px-15 lg:px-45">
-
-        <article class="space-y-4 text-gray-700 text-justify">
+      <section class="grid grid-cols-1 gap-y-15 px-6 py-15 2xl:grid-cols-2 md:gap-y-20 xl:gap-x-30 lg:px-45 md:px-15">
+        <article class="text-justify text-gray-700 space-y-4">
           <h1 class="text-3xl">
             Ohayo
             <Icon name="🖖🏾" />
@@ -44,7 +44,7 @@ useHead({
             Just a human passionate about building innovative solutions and being exposed to new challenges and technologies.
           </p>
 
-          <br />
+          <br>
 
           <p>I have 3 main passions in life:</p>
           <ul class="space-y-3">
@@ -65,7 +65,7 @@ useHead({
             </li>
           </ul>
 
-          <br />
+          <br>
 
           <p>
             Don't hesitate to write to me to discuss tech, music, or the lastest chapter of One Piece.
@@ -76,13 +76,12 @@ useHead({
         <NuxtLink to="https://ikigaitribe.com/ikigai/ikigai-worksheet/" target="_blank" class="flex justify-center">
           <NuxtImg src="/ikigai.png" format="webp" sizes="sm:87vw md:60vw lg:500px xl:620px" alt="IKIGAI" />
         </NuxtLink>
-
       </section>
     </main>
 
     <Plum />
 
-    <footer class="w-screen bottom-0 py-5 text-sm text-gray-400 text-center">
+    <footer class="bottom-0 w-screen py-5 text-center text-sm text-gray-400">
       &copy; 2023 Oumar Barry
     </footer>
   </div>

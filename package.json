@@ -12,6 +12,7 @@
     "@antfu/eslint-config": "^0.38.2",
     "@kevinmarrec/nuxt-pwa": "^0.17.0",
     "@nuxt/image-edge": "1.0.0-28004510.a0dc8e8",
+    "@unocss/eslint-config": "^0.50.6",
     "@unocss/nuxt": "^0.50.6",
     "@vueuse/nuxt": "^9.13.0",
     "eslint": "^8.37.0",

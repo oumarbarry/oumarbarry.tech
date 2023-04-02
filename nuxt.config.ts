@@ -1,6 +1,9 @@
 export default defineNuxtConfig({
   typescript: { shim: false },
-  experimental: { reactivityTransform: true },
+
+  experimental: { inlineSSRStyles: false, reactivityTransform: true  },
+
+  css: ['@unocss/reset/tailwind.css'],
 
   modules: [
     'nuxt-icon',
@@ -10,9 +13,6 @@ export default defineNuxtConfig({
     '@kevinmarrec/nuxt-pwa',
   ],
 
-  unocss: {
-    attributify: true,
-  },
   pwa: {
     manifest: { name: '' },
     workbox: { enabled: false }

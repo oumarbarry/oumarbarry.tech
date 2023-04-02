@@ -15,7 +15,7 @@ export default defineConfig({
     presetTypography(),
     presetWebFonts({
       fonts: {
-        // inter: 'Inter',
+        roboto: 'Roboto',
       },
     }),
   ],

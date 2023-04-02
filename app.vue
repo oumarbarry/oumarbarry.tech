@@ -1,3 +1,7 @@
+<script setup lang="ts">
+useHead({ title: 'Oumar Barry\'s Boring Personal Website' })
+</script>
+
 <template>
   <div class="min-h-screen">
     <header class="flex items-center justify-between px-5 py-5 lg:px-30 md:px-10">

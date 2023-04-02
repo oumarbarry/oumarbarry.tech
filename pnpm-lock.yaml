@@ -12,7 +12,11 @@ specifiers:
   eslint: ^8.37.0
   nuxt: 3.3.2
   nuxt-icon: ^0.3.3
+  nuxt-umami: ^2.1.0
   typescript: ^5.0.3
+
+dependencies:
+  nuxt-umami: 2.1.0
 
 devDependencies:
   '@antfu/eslint-config': 0.38.2_vwh6htx42aidho2qgfca5u5rwm
@@ -5463,6 +5467,10 @@ packages:
       - supports-color
       - vue
     dev: true
+
+  /nuxt-umami/2.1.0:
+    resolution: {integrity: sha512-AVU9pc5RQsS2KAdJ5nwirgu1y5YtI9PRDmymewzhnWz15h80eYFAQHQvrJdrps6JJ8xA24owg11T+uGX0H9DrA==}
+    dev: false
 
   /nuxt/3.3.2_i2n4woepixtecb2zavhfas6mpq:
     resolution: {integrity: sha512-9xNd9+7M03oYktHnuEEgNRJYfkFwjlLvRi1NsEuEyzcc0SgazGZT89CBsQnlWI3wFMhoxoYPGJ8rc4sJAhJ1Gg==}

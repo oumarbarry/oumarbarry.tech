@@ -3,7 +3,18 @@ export default defineNuxtConfig({
 
   experimental: { inlineSSRStyles: false },
 
-  // css: ['@unocss/reset/tailwind.css'],
+  css: ['@unocss/reset/tailwind.css'],
+
+  extends: ['nuxt-umami'],
+
+  appConfig: {
+    umami: {
+      host: 'https://analytics.umami.is/',
+      id: 'effc3b45-3867-4450-9619-6f09ca678745',
+      ignoreLocalhost: true,
+      version: 2,
+    },
+  },
 
   modules: [
     'nuxt-icon',

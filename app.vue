@@ -1,14 +1,3 @@
-<script setup lang="ts">
-useHead({
-  title: 'Oumar Barry\'s Boring Personal Website',
-  script: [{
-    'src': 'https://oackeee.vercel.app/tracker.js',
-    'data-ackee-server': 'https://oackeee.vercel.app',
-    'data-ackee-domain-id': '2a3d9283-90f7-40d6-a338-09b29e911707',
-  }],
-})
-</script>
-
 <template>
   <div class="min-h-screen">
     <header class="flex items-center justify-between px-5 py-5 lg:px-30 md:px-10">
@@ -25,18 +14,21 @@ useHead({
           Projects
         </NuxtLink>
 
-        <NuxtLink to="https://github.com/oumarbarry" target="_blank">
+        <NuxtLink
+          to="https://github.com/oumarbarry"
+          target="_blank"
+          class="flex items-center justify-center"
+        >
           <Icon name="carbon-logo-github" size="25px" class="text-black transition-all duration-150 ease-in-out hover:text-gray-500" />
         </NuxtLink>
       </div>
     </header>
 
     <main>
-      <section class="grid grid-cols-1 gap-y-15 px-6 py-15 2xl:grid-cols-2 md:gap-y-20 xl:gap-x-30 lg:px-45 md:px-15">
+      <section class="grid grid-cols-1 gap-y-15 px-6 pb-15 pt-13 2xl:grid-cols-2 md:gap-y-20 xl:gap-x-30 lg:px-45 md:px-15">
         <article class="text-justify text-gray-700 space-y-4">
           <h1 class="text-3xl">
-            Ohayo
-            <Icon name="🖖🏾" />
+            Ohayo <Icon name="🖖🏾" />
           </h1>
 
           <p>
@@ -73,8 +65,12 @@ useHead({
           </p>
         </article>
 
-        <NuxtLink to="https://ikigaitribe.com/ikigai/ikigai-worksheet/" target="_blank" class="flex justify-center">
-          <NuxtImg src="/ikigai.png" format="webp" sizes="sm:87vw md:60vw lg:500px xl:620px" alt="IKIGAI" />
+        <NuxtLink
+          to="https://ikigaitribe.com/ikigai/ikigai-worksheet/"
+          target="_blank"
+          class="flex justify-center"
+        >
+          <NuxtImg src="/ikigai.png" format="webp" sizes="sm:87vw md:60vw lg:500px xl:620px" alt="Understanding Ikigai" />
         </NuxtLink>
       </section>
     </main>
@@ -86,10 +82,3 @@ useHead({
     </footer>
   </div>
 </template>
-
-<style>
-html,
-body {
-  margin: 0;
-}
-</style>

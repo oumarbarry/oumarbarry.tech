@@ -9,16 +9,16 @@
     "lint": "eslint . --fix"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.38.2",
+    "@antfu/eslint-config": "^0.38.4",
     "@kevinmarrec/nuxt-pwa": "^0.17.0",
-    "@nuxt/image-edge": "1.0.0-28004510.a0dc8e8",
+    "@nuxt/image-edge": "1.0.0-28008586.381b906",
     "@types/node": "^18.15.11",
     "@unocss/eslint-config": "^0.50.6",
     "@unocss/nuxt": "^0.50.6",
-    "@vue-macros/nuxt": "^1.2.7",
+    "@vue-macros/nuxt": "^1.2.8",
     "@vueuse/nuxt": "^9.13.0",
     "eslint": "^8.37.0",
-    "nuxt": "3.3.2",
+    "nuxt": "3.3.3",
     "nuxt-icon": "^0.3.3",
     "typescript": "^5.0.3"
   },

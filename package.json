@@ -21,8 +21,5 @@
     "nuxt": "3.3.3",
     "nuxt-icon": "^0.3.3",
     "typescript": "^5.0.3"
-  },
-  "dependencies": {
-    "nuxt-umami": "^2.1.0"
   }
 }

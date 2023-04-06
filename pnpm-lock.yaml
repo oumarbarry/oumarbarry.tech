@@ -1,10 +1,5 @@
 lockfileVersion: '6.0'
 
-dependencies:
-  nuxt-umami:
-    specifier: ^2.1.0
-    version: 2.1.0
-
 devDependencies:
   '@antfu/eslint-config':
     specifier: ^0.38.4
@@ -1188,13 +1183,13 @@ packages:
     resolution: {integrity: sha512-9K4zoImiZc3HlIp6AVUDE4CWYx22a+lhSZMYNpbjW04+YF0KWj4pJXnEMjdnFTiQibFFmElcsasJXDbdI/EPhA==}
     dependencies:
       '@types/eslint': 8.37.0
-      '@types/estree': 0.0.51
+      '@types/estree': 1.0.0
     dev: true
 
   /@types/eslint@8.37.0:
     resolution: {integrity: sha512-Piet7dG2JBuDIfohBngQ3rCt7MgO9xCO4xIMKxBThCq5PNRB91IjlJ10eJVwfoNtvTErmxLzwBZ7rHZtbOMmFQ==}
     dependencies:
-      '@types/estree': 0.0.51
+      '@types/estree': 1.0.0
       '@types/json-schema': 7.0.11
     dev: true
 
@@ -5599,10 +5594,6 @@ packages:
       - supports-color
       - vue
     dev: true
-
-  /nuxt-umami@2.1.0:
-    resolution: {integrity: sha512-AVU9pc5RQsS2KAdJ5nwirgu1y5YtI9PRDmymewzhnWz15h80eYFAQHQvrJdrps6JJ8xA24owg11T+uGX0H9DrA==}
-    dev: false
 
   /nuxt@3.3.3(@types/node@18.15.11)(eslint@8.37.0)(typescript@5.0.3):
     resolution: {integrity: sha512-dsBOUzioESYT0O5t4E/t0i/EJagKcW0f2UF5lPe7BfH9UnicfLoC2u/3KxOND3hn/shCoJAQJlLIsPa4xsgQcg==}

@@ -1,16 +1,3 @@
-<script setup lang="ts">
-useHead({
-  title: 'Oumar Barry\'s Boring Personal Website',
-  script: [
-    {
-      'async': true,
-      'src': 'https://analytics.umami.is/script.js',
-      'data-website-id': '63c3ff1e-af8b-47ed-814f-5dd299e193e5',
-    },
-  ],
-})
-</script>
-
 <template>
   <div class="min-h-screen font-roboto">
     <header class="flex items-center justify-between px-5 py-5 lg:px-30 md:px-10">

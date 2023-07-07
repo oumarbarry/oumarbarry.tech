@@ -1,6 +1,3 @@
-<!-- eslint-disable @typescript-eslint/no-empty-function -->
-<!-- eslint-disable @typescript-eslint/no-non-null-assertion -->
-
 <!-- s/o @antfu -->
 
 <script setup lang="ts">

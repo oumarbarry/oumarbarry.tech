@@ -1,7 +1,6 @@
 import {
   defineConfig,
   presetAttributify,
-  presetTypography,
   presetUno,
   presetWebFonts,
   transformerDirectives,
@@ -12,7 +11,6 @@ export default defineConfig({
   presets: [
     presetUno(),
     presetAttributify(),
-    presetTypography(),
     presetWebFonts({
       fonts: {
         roboto: 'Roboto',

@@ -54,7 +54,7 @@
           <p>
             Feel free to reach out to me anytime to chat about tech, music, or the latest chapter of One Piece. <br>
             <a
-              href="mailto:oumar.barry1202@gmail.com"
+              href="mailto:hi@oumarbarry.tech"
               class="text-gray-500 underline underline-offset-1.8 decoration-dashed hover:no-underline"
             >
               cd email

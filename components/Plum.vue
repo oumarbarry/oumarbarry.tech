@@ -1,5 +1,4 @@
 <!-- s/o @antfu -->
-
 <script setup lang="ts">
 import type { Fn } from '@vueuse/core'
 

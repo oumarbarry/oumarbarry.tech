@@ -1,8 +1,4 @@
 export default defineNuxtConfig({
-  typescript: { shim: false },
-
-  devtools: { enabled: true },
-
   app: {
     head: {
       title: 'Oumar Barry\'s Boring Personal Website',
@@ -14,18 +10,24 @@ export default defineNuxtConfig({
         },
       ],
     },
+    pageTransition: false,
+    layoutTransition: false,
   },
 
   css: ['@unocss/reset/tailwind.css'],
+
+  typescript: { shim: false },
+  devtools: { enabled: true },
+
+  experimental: {
+    typescriptBundlerResolution: true,
+    componentIslands: true,
+  },
 
   modules: [
     'nuxt-icon',
     '@unocss/nuxt',
     '@vueuse/nuxt',
-    '@nuxt/image',
-    '@kevinmarrec/nuxt-pwa',
     '@vue-macros/nuxt',
   ],
-
-  pwa: { manifest: { name: '' } },
 })

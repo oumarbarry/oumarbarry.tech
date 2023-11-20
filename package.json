@@ -20,6 +20,7 @@
     "eslint": "^8.53.0",
     "nuxt": "^3.8.1",
     "nuxt-icon": "^0.6.5",
+    "nuxt-viewport": "^2.0.6",
     "typescript": "^5.2.2"
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <main>
-    <section class="grid grid-cols-1 gap-y-15 px-6 pb-15 pt-10 2xl:grid-cols-2 md:gap-y-20 xl:gap-x-30 lg:px-50 md:px-15">
-      <article class="text-justify text-base leading-7 text-#555557 space-y-6">
+    <section class="grid grid-cols-1 gap-y-15 px-5 pb-15 pt-10 2xl:grid-cols-2 md:gap-y-20 xl:gap-x-20 lg:px-40 md:px-15">
+      <article class="text-justify text-base leading-7 text-[#555557] space-y-6">
         <h1 class="text-3xl">
           Ohayo <Icon name="🖖🏾" />
         </h1>
@@ -12,16 +12,12 @@
         </p>
 
         <p>
-          My life revolves around three things that keep me fired up: coding, music, and manga/anime. <br>
-
-          Coding, for me, is not just a skill, but an art form - a way of expressing creativity through lines of code. <br>
-
-          When I'm not coding or exploring Github, you can find me enjoying music, usually French rap, or immersing myself in the captivating worlds of manga/anime.
-          I love action-packed anime like Attack on Titan, Naruto and  My Hero Academia, but I also particularly enjoy heart-warming slice-of-life stories like Barakamon and Silver Spoon.
+          In my life, I hold four primary passions close to heart: coding, manga/anime, gaming, and the captivating field of astronomy/space.
+          When I step away from coding or delving into Github, you'll often find me immersed in the pages of a manga.
         </p>
 
         <p>
-          Feel free to reach out to me anytime to chat about tech, music, or the latest chapter of One Piece. <br>
+          Feel free to reach out to me anytime to chat about tech, or the latest chapter of One Piece... <br>
           <a
             href="mailto:hi@oumarbarry.tech"
             class="text-gray-500 underline underline-offset-1.8 decoration-dashed hover:no-underline"
@@ -31,9 +27,20 @@
         </p>
       </article>
 
-      <div class="flex items-center justify-center">
-        <img src="~/assets/images/ikigai.png" alt="Ikigai" class="sm:87vw md:60vw lg:500px xl:620px">
-      </div>
+      <ClientOnly>
+        <div class="flex items-start">
+          <Game />
+        </div>
+        <template #fallback>
+          <div class="flex items-center justify-center">
+            <Icon name="i-svg-spinners-bars-rotate-fade" />
+          </div>
+        </template>
+      </ClientOnly>
     </section>
+
+    <div class="mb-7 mt-5 flex items-center justify-center">
+      <img src="~/assets/images/ikigai.png" alt="Ikigai" class="w-87vw md:w-60vw xl:w-520px">
+    </div>
   </main>
 </template>

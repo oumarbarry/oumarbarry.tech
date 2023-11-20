@@ -2,6 +2,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: 'Oumar Barry\'s Boring Personal Website',
+      link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
       script: [
         {
           'async': true,
@@ -22,6 +23,7 @@ export default defineNuxtConfig({
   experimental: {
     typescriptBundlerResolution: true,
     componentIslands: true,
+    typedPages: true,
   },
 
   modules: [
@@ -29,5 +31,6 @@ export default defineNuxtConfig({
     '@unocss/nuxt',
     '@vueuse/nuxt',
     '@vue-macros/nuxt',
+    'nuxt-viewport',
   ],
 })

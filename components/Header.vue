@@ -6,6 +6,14 @@
 
     <div class="flex items-center gap-x-8">
       <NuxtLink
+        v-if="$viewport.isGreaterOrEquals('desktop')"
+        to="/projects"
+        class="text-gray-500 no-underline transition-all duration-150 ease-in-out hover:text-black"
+      >
+        Projects
+      </NuxtLink>
+      <NuxtLink
+        v-else
         to="https://oumarbarry.notion.site/Oumar-Barry-4c46c1855f244f61b8f122837f19dda7"
         target="_blank"
         class="text-gray-500 no-underline transition-all duration-150 ease-in-out hover:text-black"

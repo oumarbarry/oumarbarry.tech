@@ -11,7 +11,7 @@ const color = '#88888825'
 
 const el = $ref<HTMLCanvasElement | null>(null)
 const size = $ref(useWindowSize())
-const init = $ref(4)
+const init = $ref(5)
 let startFn = $ref<Fn>(() => { })
 
 function initCanvas(canvas: HTMLCanvasElement, width = 450, height = 450, _dpi?: number) {
@@ -50,7 +50,7 @@ onMounted(async () => {
   let iterations = 0
 
   const step = (x: number, y: number, rad: number) => {
-    const length = random() * 7
+    const length = random() * 9
 
     const [nx, ny] = polar2cart(x, y, length, rad)
 

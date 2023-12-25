@@ -1,7 +1,7 @@
 <template>
   <main>
-    <section class="grid grid-cols-1 gap-y-15 px-5 pb-15 pt-10 2xl:grid-cols-2 md:gap-y-20 xl:gap-x-20 lg:px-40 md:px-15">
-      <article class="text-justify text-base leading-7 text-[#555557] space-y-6">
+    <section class="grid grid-cols-1 gap-y-15 px-5 pb-15 pt-10 xl:grid-cols-2 md:gap-y-20 xl:gap-x-20 lg:px-40 md:px-15">
+      <article class="text-justify text-base text-[#555557] leading-7 space-y-6">
         <h1 class="text-3xl">
           Ohayo <Icon name="🖖🏾" />
         </h1>
@@ -28,9 +28,8 @@
       </article>
 
       <ClientOnly>
-        <div class="flex items-start">
-          <Game />
-        </div>
+        <Game />
+
         <template #fallback>
           <div class="flex items-center justify-center">
             <Icon name="i-svg-spinners-bars-rotate-fade" />
@@ -39,8 +38,8 @@
       </ClientOnly>
     </section>
 
-    <div class="mb-7 mt-5 flex items-center justify-center">
+    <!-- <div class="mb-7 mt-5 flex items-center justify-center">
       <img src="~/assets/images/ikigai.png" alt="Ikigai" class="w-87vw md:w-60vw xl:w-520px">
-    </div>
+    </div> -->
   </main>
 </template>

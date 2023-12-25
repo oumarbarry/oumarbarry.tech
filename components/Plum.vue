@@ -1,13 +1,13 @@
 <!-- s/o @antfu -->
 <script setup lang="ts">
-import type { Fn } from '@vueuse/core'
+import type { Fn } from "@vueuse/core"
 
 const { PI, random } = Math
 
 const r180 = PI
 const r90 = PI / 2
 const r15 = PI / 12
-const color = '#88888825'
+const color = "#88888825"
 
 const el = $ref<HTMLCanvasElement | null>(null)
 const size = $ref(useWindowSize())
@@ -15,7 +15,7 @@ const init = $ref(5)
 let startFn = $ref<Fn>(() => { })
 
 function initCanvas(canvas: HTMLCanvasElement, width = 450, height = 450, _dpi?: number) {
-  const ctx = canvas.getContext('2d')!
+  const ctx = canvas.getContext("2d")!
 
   const dpr = window.devicePixelRatio || 1
 
@@ -119,7 +119,7 @@ onMounted(async () => {
   startFn()
 })
 
-const mask = computed(() => 'radial-gradient(circle, transparent, black);')
+const mask = computed(() => "radial-gradient(circle, transparent, black);")
 </script>
 
 <template>

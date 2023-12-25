@@ -5,7 +5,7 @@ import {
   presetWebFonts,
   transformerDirectives,
   transformerVariantGroup,
-} from 'unocss'
+} from "unocss"
 
 export default defineConfig({
   presets: [
@@ -13,7 +13,7 @@ export default defineConfig({
     presetAttributify(),
     presetWebFonts({
       fonts: {
-        roboto: 'Roboto',
+        roboto: "Roboto",
       },
     }),
   ],

@@ -67,8 +67,9 @@ onMounted(async () => {
       || nx > size.width + 100
       || ny < -100
       || ny > size.height + 100
-    )
+    ) {
       return
+    }
 
     if (iterations <= init || random() > 0.5)
       steps.push(() => step(nx, ny, rad1))

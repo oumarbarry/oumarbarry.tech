@@ -4,12 +4,6 @@ onMounted(() => {
 })
 </script>
 
-<!-- <template>
-  <div class="game-container">
-    <div id="game" class="game-canvas" />
-  </div>
-</template> -->
-
 <template>
   <div id="game" />
 </template>
@@ -22,13 +16,13 @@ onMounted(() => {
 
 .game-canvas {
   width: 100%;
-  max-width: 640px; /* Adjust the maximum width as needed */
-  height: 450px; /* Adjust the height as needed */
+  max-width: 640px;
+  height: 450px;
   position: relative;
-  margin-top: 20px; /* Adjust the top margin as needed */
+  margin-top: 20px;
 }
 
 canvas {
-  @apply: w-full h-50vh lg:h-450px top-0 left-0 relative m-auto;
+  --at-apply: "w-full h-50vh lg:h-450px top-0 left-0 relative m-auto";
 }
 </style>

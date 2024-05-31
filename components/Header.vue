@@ -18,7 +18,7 @@
         class="flex items-center justify-center"
       >
         <Icon
-          name="carbon:logo-github"
+          name="i-carbon-logo-github"
           size="25px"
           class="text-gray-500 transition-all duration-150 ease-in-out hover:text-black"
         />

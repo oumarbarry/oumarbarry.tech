@@ -1,4 +1,6 @@
 export default defineNuxtConfig({
+  devtools: { enabled: true },
+
   app: {
     head: {
       title: "Oumar Barry's Boring Personal Website",
@@ -21,25 +23,16 @@ export default defineNuxtConfig({
     "/projects": { redirect: import.meta.env.NOTION_PORTFOLIO },
   },
 
-  typescript: { shim: false },
-  devtools: { enabled: true },
-
-  experimental: {
-    // typedPages: true,
-    componentIslands: true,
-  },
+  experimental: { componentIslands: true },
 
   modules: [
-    "nuxt-icon",
-    "@unocss/nuxt",
-    "@vueuse/nuxt",
+    "@nuxt/eslint",
     "@vue-macros/nuxt",
-    "@nuxt-alt/proxy",
+    "@vueuse/nuxt",
+    "@unocss/nuxt",
+    "nuxt-icon",
+    "nuxt-clarity-analytics",
   ],
 
-  // proxy: {
-  //   proxies: {
-  //     "/projects": import.meta.env.NOTION_PORTFOLIO,
-  //   },
-  // },
+  eslint: { config: { standalone: false } },
 })

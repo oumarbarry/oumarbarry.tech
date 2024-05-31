@@ -40,7 +40,7 @@ export function startGame(options: InvadersOptions = {}) {
   const ALIEN_X_MARGIN = 40
   const ALIEN_SQUAD_WIDTH = 11 * ALIEN_X_MARGIN
 
-  interface ClipRect { x: number; y: number; w: number; h: number }
+  interface ClipRect { x: number, y: number, w: number, h: number }
 
   // ###################################################################
   // Utility functions & classes
@@ -374,8 +374,9 @@ export function startGame(options: InvadersOptions = {}) {
         if (
           alienDirection === 1
           && this.position.x > CANVAS_WIDTH - this.bounds.w / 2 - 20
-        )
+        ) {
           updateAlienLogic = true
+        }
 
         if (this.position.y > CANVAS_WIDTH - 50)
           reset()
@@ -577,9 +578,9 @@ export function startGame(options: InvadersOptions = {}) {
         new Enemy(
           clipRects,
           CANVAS_WIDTH / 2
-            - ALIEN_SQUAD_WIDTH / 2
-            + ALIEN_X_MARGIN / 2
-            + gridX * ALIEN_X_MARGIN,
+          - ALIEN_SQUAD_WIDTH / 2
+          + ALIEN_X_MARGIN / 2
+          + gridX * ALIEN_X_MARGIN,
           CANVAS_HEIGHT / 3.25 - gridY * 40,
         ),
       )
@@ -891,7 +892,7 @@ export function startGame(options: InvadersOptions = {}) {
   // ###################################################################
   // Touch Support
   // ###################################################################
-  interface TouchPos { x: number; y: number }
+  interface TouchPos { x: number, y: number }
   let touchStart: TouchPos
 
   document.addEventListener("touchstart", (e) => {

@@ -10,16 +10,11 @@ onMounted(() => {
 
 <style>
 .game-container {
-  display: flex;
-  justify-content: center;
+  --at-apply: flex justify-center;
 }
 
 .game-canvas {
-  width: 100%;
-  max-width: 640px;
-  height: 450px;
-  position: relative;
-  margin-top: 20px;
+  --at-apply: "relative w-full max-w-640px h-450px mt-20px"
 }
 
 canvas {

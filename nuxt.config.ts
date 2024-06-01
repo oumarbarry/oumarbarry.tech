@@ -13,8 +13,6 @@ export default defineNuxtConfig({
         },
       ],
     },
-    pageTransition: false,
-    layoutTransition: false,
   },
 
   css: ["@unocss/reset/tailwind.css"],

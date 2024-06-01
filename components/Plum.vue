@@ -1,4 +1,7 @@
-<!-- s/o @antfu -->
+<!-- s/o @antfu7 -->
+<!-- Based on original source from https://github.com/antfu/antfu.me/blob/main/src/components/ArtPlum.vue -->
+<!-- By Anthony Fu <https://github.com/antfu> -->
+
 <script setup lang="ts">
 import type { Fn } from "@vueuse/core"
 
@@ -28,6 +31,7 @@ function initCanvas(canvas: HTMLCanvasElement, width = 450, height = 450, _dpi?:
   canvas.style.height = `${height}px`
   canvas.width = dpi * width
   canvas.height = dpi * height
+
   ctx.scale(dpi, dpi)
 
   return { ctx, dpi }
@@ -36,6 +40,7 @@ function initCanvas(canvas: HTMLCanvasElement, width = 450, height = 450, _dpi?:
 function polar2cart(x = 0, y = 0, r = 0, theta = 0) {
   const dx = r * Math.cos(theta)
   const dy = r * Math.sin(theta)
+
   return [x + dx, y + dy]
 }
 
@@ -51,7 +56,6 @@ onMounted(async () => {
 
   const step = (x: number, y: number, rad: number) => {
     const length = random() * 9
-
     const [nx, ny] = polar2cart(x, y, length, rad)
 
     ctx.beginPath()
@@ -112,6 +116,7 @@ onMounted(async () => {
       () => step(0, random() * size.height, 0),
       () => step(size.width, random() * size.height, r180),
     ]
+
     if (size.width < 500)
       steps = steps.slice(0, 2)
     controls.resume()

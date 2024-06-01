@@ -1,5 +1,6 @@
-// Based on original source from https://codepen.io/adelciotto/pen/WNzRYy
-// By Anthony Del Ciotto <https://github.com/adelciotto>
+// s/o @_pi0_
+// Based on original source from https://github.com/pi0/space-invaders/blob/main/index.ts
+// By Pooya Parsa <https://github.com/pi0>
 
 export interface InvadersOptions {
   selector?: string

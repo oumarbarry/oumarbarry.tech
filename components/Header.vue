@@ -1,7 +1,7 @@
 <template>
   <header class="flex items-center justify-between px-5 py-5 lg:px-30 md:px-10">
     <NuxtLink to="/">
-      <Logo class="h-12 w-12" />
+      <Logo class="size-12" />
     </NuxtLink>
 
     <div class="flex items-center gap-x-8">

@@ -1,10 +1,9 @@
 <template>
-  <div class="min-h-screen font-roboto">
+  <div class="site-shell min-h-screen">
     <Header />
 
     <NuxtPage />
 
-    <Plum />
     <Footer />
   </div>
 </template>

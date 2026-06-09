@@ -1,13 +1,16 @@
 <template>
   <footer class="site-footer">
-    <div class="powered-line">
-      <span aria-hidden="true">▸</span>
-      <span>
-        Powered by
-        <NuxtLink to="https://nuxt.com" target="_blank">[Nuxt]</NuxtLink>
-      </span>
-    </div>
+    <div class="site-rails footer-rails">
+      <div class="footer-card">
+        <div class="powered-line">
+          <span>
+            Powered by
+            <NuxtLink to="https://nuxt.com" target="_blank">[Nuxt]</NuxtLink>
+          </span>
+        </div>
 
-    <PerfStats />
+        <PerfStats />
+      </div>
+    </div>
   </footer>
 </template>

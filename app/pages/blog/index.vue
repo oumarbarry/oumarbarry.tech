@@ -4,8 +4,18 @@ const { data: posts } = await useAsyncData("blog-posts", () => {
 })
 
 useSeoMeta({
-  title: "Blog - Oumar Barry",
+  title: "Blog",
   description: "Blog - Oumar Barry.",
+  ogTitle: "Blog - Oumar Barry",
+  ogDescription: "Blog - Oumar Barry.",
+  twitterTitle: "Blog - Oumar Barry",
+  twitterDescription: "Blog - Oumar Barry.",
+})
+
+defineOgImage("Oumar", {
+  title: "Blog",
+  description: "oumarbarry.tech",
+  siteName: "oumarbarry.tech",
 })
 </script>
 

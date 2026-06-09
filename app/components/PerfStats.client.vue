@@ -1,10 +1,10 @@
 <script setup lang="ts">
-const stats = ref({
-  protocol: "h2",
-  transfer: "0 bytes",
-  request: "0.0 ms",
-  duration: "0.0 ms",
-})
+const stats = ref<{
+  protocol: string
+  transfer: string
+  request: string
+  duration: string
+} | null>(null)
 
 onMounted(() => {
   const navigation = performance.getEntriesByType("navigation")[0] as
@@ -14,8 +14,8 @@ onMounted(() => {
   if (!navigation) return
 
   stats.value = {
-    protocol: navigation.nextHopProtocol || "h2",
-    transfer: `${navigation.transferSize || 0} bytes`,
+    protocol: navigation.nextHopProtocol || "n/a",
+    transfer: navigation.transferSize ? `${navigation.transferSize} bytes` : "cached",
     request: `${Math.max(0, navigation.responseStart - navigation.requestStart).toFixed(1)} ms`,
     duration: `${navigation.duration.toFixed(1)} ms`,
   }
@@ -26,7 +26,7 @@ onMounted(() => {
   <details class="perf-stats">
     <summary>Perf Stats</summary>
 
-    <dl>
+    <dl v-if="stats">
       <div>
         <dt>Protocol:</dt>
         <dd>{{ stats.protocol }}</dd>
@@ -44,5 +44,7 @@ onMounted(() => {
         <dd>{{ stats.duration }}</dd>
       </div>
     </dl>
+
+    <p v-else>Measuring...</p>
   </details>
 </template>

@@ -1,24 +1,12 @@
 import {
   defineConfig,
   presetAttributify,
-  presetUno,
-  presetWebFonts,
+  presetWind3,
   transformerDirectives,
   transformerVariantGroup,
 } from "unocss"
 
 export default defineConfig({
-  presets: [
-    presetUno(),
-    presetAttributify(),
-    presetWebFonts({
-      fonts: {
-        roboto: "Roboto",
-      },
-    }),
-  ],
-  transformers: [
-    transformerDirectives(),
-    transformerVariantGroup(),
-  ],
+  presets: [presetWind3(), presetAttributify()],
+  transformers: [transformerDirectives(), transformerVariantGroup()],
 })

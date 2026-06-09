@@ -1,14 +1,10 @@
-import antfu from "@antfu/eslint-config"
 import withNuxt from "./.nuxt/eslint.config.mjs"
 
-export default withNuxt(
-  antfu({
-    stylistic: { quotes: "double" },
-
-    unocss: true,
-
-    rules: {
-      "no-console": 0,
-    },
-  }),
-)
+export default withNuxt({
+  ignores: [".nuxt/**", ".output/**", "dist/**", "node_modules/**"],
+  rules: {
+    "no-console": "off",
+    "vue/html-self-closing": "off",
+    "vue/multi-word-component-names": "off",
+  },
+})

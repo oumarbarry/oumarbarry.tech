@@ -4,6 +4,7 @@
       <NuxtLink to="/" class="site-brand">[oumarbarry.tech]</NuxtLink>
 
       <nav class="site-nav" aria-label="Primary">
+        <NuxtLink to="/work" class="nav-link">Work</NuxtLink>
         <NuxtLink to="/blog" class="nav-link">Blog</NuxtLink>
 
         <NuxtLink

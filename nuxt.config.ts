@@ -31,7 +31,7 @@ export default defineNuxtConfig({
     url: "https://oumarbarry.tech",
     name: "Oumar Barry",
     description:
-      "Personal website of Oumar Barry, a developer interested in technology, manga, gaming, cycling, swimming, and space.",
+      "Oumar Barry is a software architect building AI products, developer platforms and infrastructure from Conakry, Guinea.",
     defaultLocale: "en",
     indexable: true,
     trailingSlash: false,
@@ -55,7 +55,7 @@ export default defineNuxtConfig({
   sitemap: {
     zeroRuntime: true,
     autoLastmod: true,
-    urls: ["/blog"],
+    urls: ["/work", "/blog"],
     defaults: {
       changefreq: "weekly",
       priority: 0.7,
@@ -128,6 +128,7 @@ export default defineNuxtConfig({
 
   routeRules: {
     "/": { prerender: true },
+    "/work": { prerender: true, ogImage: false },
     "/blog/**": { prerender: true },
     "/robots.txt": { prerender: true },
   },

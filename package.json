@@ -6,11 +6,13 @@
     "dev": "nuxt dev",
     "build": "nuxt build",
     "preview": "nuxt preview",
+    "test": "node --test tests/work-page.test.mjs",
+    "test:rendered": "node --test tests/rendered-work.test.mjs",
     "postinstall": "nuxt prepare",
-    "format": "oxfmt app content .vscode content.config.ts eslint.config.mjs nuxt.config.ts package.json tsconfig.json unocss.config.ts vercel.json",
-    "format:check": "oxfmt --check app content .vscode content.config.ts eslint.config.mjs nuxt.config.ts package.json tsconfig.json unocss.config.ts vercel.json",
-    "lint": "node node_modules/eslint/bin/eslint.js app content.config.ts eslint.config.mjs nuxt.config.ts unocss.config.ts",
-    "lint:fix": "node node_modules/eslint/bin/eslint.js app content.config.ts eslint.config.mjs nuxt.config.ts unocss.config.ts --fix"
+    "format": "oxfmt app content tests .vscode content.config.ts eslint.config.mjs nuxt.config.ts package.json tsconfig.json unocss.config.ts vercel.json",
+    "format:check": "oxfmt --check app content tests .vscode content.config.ts eslint.config.mjs nuxt.config.ts package.json tsconfig.json unocss.config.ts vercel.json",
+    "lint": "node node_modules/eslint/bin/eslint.js app tests content.config.ts eslint.config.mjs nuxt.config.ts unocss.config.ts",
+    "lint:fix": "node node_modules/eslint/bin/eslint.js app tests content.config.ts eslint.config.mjs nuxt.config.ts unocss.config.ts --fix"
   },
   "dependencies": {
     "@nuxt/content": "^3.14.0",

@@ -498,6 +498,13 @@ p + p {
   flex-direction: column;
 }
 
+.feature-card-head-column .status-pill {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  text-align: center;
+  white-space: normal;
+}
+
 .feature-card h3,
 .oss-card h3,
 .more-card h3 {

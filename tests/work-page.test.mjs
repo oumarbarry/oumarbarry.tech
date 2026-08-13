@@ -30,6 +30,18 @@ test("selected work page exposes inspectable links and honest boundaries", async
   assert.match(source, /Private build/i)
   assert.match(source, /Pre-publication/i)
   assert.match(source, /Planned for open source/i)
+  assert.match(
+    source,
+    /<h3>Infrastructure that has to work<\/h3>[\s\S]*?LeaderNet: production · Horizon: local benchmark[\s\S]*?<\/article>/i,
+  )
+  assert.match(
+    source,
+    /<span class="status-pill">Private build<\/span>[\s\S]*?<h3>Ozone<\/h3>[\s\S]*?single-node[\s\S]*?<\/article>/i,
+  )
+  assert.match(
+    source,
+    /<span class="status-pill status-pre">Pre-publication<\/span>[\s\S]*?<\/article>/i,
+  )
 })
 
 test("work is in the primary navigation and prerendered", async () => {

@@ -12,10 +12,13 @@ useSeoMeta({
   ogUrl: "https://oumarbarry.tech/work",
   ogImage: "https://oumarbarry.tech/work-og.png",
   ogImageAlt: "Oumar Barry - Selected Work",
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
   twitterCard: "summary_large_image",
   twitterTitle: `${title} - Oumar Barry`,
   twitterDescription: description,
   twitterImage: "https://oumarbarry.tech/work-og.png",
+  twitterImageAlt: "Oumar Barry - Selected Work",
 })
 </script>
 
@@ -172,7 +175,9 @@ useSeoMeta({
                   <p class="feature-number">03</p>
                   <h3>Infrastructure that has to work</h3>
                 </div>
-                <span class="status-pill status-live">Production + benchmarked</span>
+                <span class="status-pill status-live">
+                  LeaderNet: production · Horizon: local benchmark
+                </span>
               </div>
               <p>
                 At LeaderNet, I work on critical software, network and infrastructure systems for a

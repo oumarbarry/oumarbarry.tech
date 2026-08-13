@@ -170,7 +170,7 @@ useSeoMeta({
             </article>
 
             <article class="feature-card">
-              <div class="feature-card-head">
+              <div class="feature-card-head feature-card-head-column">
                 <div>
                   <p class="feature-number">03</p>
                   <h3>Infrastructure that has to work</h3>

@@ -494,6 +494,10 @@ p + p {
   gap: 1rem;
 }
 
+.feature-card-head-column {
+  flex-direction: column;
+}
+
 .feature-card h3,
 .oss-card h3,
 .more-card h3 {

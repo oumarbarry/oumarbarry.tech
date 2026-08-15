@@ -8,7 +8,12 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: "en",
       },
-      link: [{ rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
+      link: [
+        { rel: "icon", type: "image/svg+xml", href: "/favicon.svg?v=2" },
+        { rel: "icon", type: "image/png", sizes: "32x32", href: "/icon-32x32.png?v=2" },
+        { rel: "icon", type: "image/png", sizes: "16x16", href: "/icon-16x16.png?v=2" },
+        { rel: "apple-touch-icon", sizes: "180x180", href: "/apple-touch-icon.png?v=2" },
+      ],
     },
   },
 
@@ -43,8 +48,8 @@ export default defineNuxtConfig({
       applicationName: "Oumar Barry",
       themeColor: "#050605",
       colorScheme: "dark",
-      twitterCreator: "@OumarBarry59799",
-      twitterSite: "@OumarBarry59799",
+      twitterCreator: "@obwann8",
+      twitterSite: "@obwann8",
       ogLocale: "en_US",
       ogType: "website",
     },
@@ -78,7 +83,7 @@ export default defineNuxtConfig({
       email: "oumar379@proton.me",
       sameAs: [
         "https://github.com/oumarbarry",
-        "https://x.com/OumarBarry59799",
+        "https://x.com/obwann8",
         "https://bsky.app/profile/oumarbarry.bsky.social",
       ],
     },

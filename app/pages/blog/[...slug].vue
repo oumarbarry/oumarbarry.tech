@@ -20,23 +20,25 @@ useSeoMeta({
 
 <template>
   <main class="page-grid">
-    <article v-if="post" class="article-shell">
-      <header class="article-header">
-        <NuxtLink to="/blog" class="back-link">Back to blog</NuxtLink>
-        <p class="post-meta">
-          {{
-            new Date(post.date).toLocaleDateString("en", {
-              year: "numeric",
-              month: "short",
-              day: "numeric",
-            })
-          }}
-        </p>
-        <h1>{{ post.title }}</h1>
-        <p v-if="post.description">{{ post.description }}</p>
-      </header>
+    <div class="site-rails content-rails">
+      <article v-if="post" class="content-panel">
+        <header class="article-header">
+          <NuxtLink to="/blog" class="back-link">back to blog</NuxtLink>
+          <p class="post-meta">
+            {{
+              new Date(post.date).toLocaleDateString("en", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })
+            }}
+          </p>
+          <h1>{{ post.title }}</h1>
+          <p v-if="post.description">{{ post.description }}</p>
+        </header>
 
-      <ContentRenderer :value="post" class="article-body" />
-    </article>
+        <ContentRenderer :value="post" class="article-body" />
+      </article>
+    </div>
   </main>
 </template>

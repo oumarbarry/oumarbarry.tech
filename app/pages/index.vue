@@ -1,7 +1,7 @@
 <template>
   <main class="home-shell">
-    <div class="site-rails home-rails">
-      <section class="home-panel">
+    <div class="site-rails content-rails">
+      <section class="content-panel">
         <article class="home-copy">
           <h1 class="home-title">
             <span>Ohayo</span>
@@ -9,66 +9,88 @@
           </h1>
 
           <p>
-            My name is <span class="strong">Oumar Barry</span>. I'm a passionate problem solver who
-            enjoys exploring new technologies and taking on new challenges.
+            hey, i'm <span class="strong">oumar</span>. i spend most of my time building stuff,
+            fixing problems, and trying to understand how things work.
           </p>
 
           <p>
-            Outside of coding, I'm passionate about manga/anime, gaming, cycling/swimming, and
-            astronomy/space. When I step away from coding or delving into Github, you'll often find
-            me immersed in the pages of a manga.
+            outside of code, i'm into manga, anime, gaming, cycling, swimming, and space. if i'm not
+            on github, i'm probably reading manga, and there's a very good chance it's one piece.
           </p>
 
-          <p>
-            Feel free to reach out to me anytime to chat about tech, or the latest chapter of One
-            Piece...
-          </p>
+          <p>want to talk tech or argue about the latest chapter? send me a message.</p>
 
-          <h2>Contact</h2>
-          <p>You can find and contact me via social media or email.</p>
+          <p>you can find and contact me via social media or email.</p>
 
           <ul class="contact-list">
             <li>
-              <NuxtLink to="https://x.com/OumarBarry59799" target="_blank">
+              <span class="contact-label">
                 <Icon name="carbon:logo-x" size="14px" />
-                Twitter
+                <span class="contact-name">twitter</span>
+              </span>
+              <NuxtLink to="https://x.com/obwann8" target="_blank" class="contact-handle-link">
+                @obwann8
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="https://bsky.app/profile/oumarbarry.bsky.social" target="_blank">
+              <span class="contact-label">
                 <Icon name="carbon:logo-bluesky" size="14px" />
-                Bluesky
+                <span class="contact-name">bluesky</span>
+              </span>
+              <NuxtLink
+                to="https://bsky.app/profile/did:plc:cqi3s7yscf7gtht3tg5osdqu"
+                target="_blank"
+                class="contact-handle-link"
+              >
+                @oumarbarry.tech
               </NuxtLink>
             </li>
             <li>
-              <a href="mailto:oumar379@proton.me">
+              <span class="contact-label">
                 <Icon name="carbon:email" size="14px" />
-                Email
+                <span class="contact-name">email</span>
+              </span>
+              <a href="mailto:oumar379@proton.me" class="contact-handle-link">
+                oumar379@proton.me
               </a>
             </li>
             <li>
-              <NuxtLink to="https://github.com/oumarbarry" target="_blank">
+              <span class="contact-label">
                 <Icon name="carbon:logo-github" size="14px" />
-                GitHub
+                <span class="contact-name">github</span>
+              </span>
+              <NuxtLink
+                to="https://github.com/oumarbarry"
+                target="_blank"
+                class="contact-handle-link"
+              >
+                @oumarbarry
               </NuxtLink>
             </li>
             <li>
-              <span class="contact-muted">
+              <span class="contact-label">
                 <Icon name="carbon:logo-discord" size="14px" />
-                Discord @oumar7
+                <span class="contact-name">discord</span>
               </span>
+              <span class="contact-handle">@oumar7</span>
             </li>
           </ul>
 
           <nav class="home-editorial-nav" aria-label="Explore this site">
             <NuxtLink to="/work" class="home-editorial-link">
-              <span class="home-editorial-title">&gt; work</span>
+              <span class="home-editorial-heading">
+                <span class="home-editorial-title">&gt; work</span>
+                <span class="status-badge">building</span>
+              </span>
               <span class="home-editorial-description">
                 some of the stuff i've built and the problems i ran into along the way.
               </span>
             </NuxtLink>
             <NuxtLink to="/blog" class="home-editorial-link">
-              <span class="home-editorial-title">&gt; blog</span>
+              <span class="home-editorial-heading">
+                <span class="home-editorial-title">&gt; blog</span>
+                <span class="status-badge">soon</span>
+              </span>
               <span class="home-editorial-description">
                 notes on tech, manga, and whatever else is on my mind.
               </span>

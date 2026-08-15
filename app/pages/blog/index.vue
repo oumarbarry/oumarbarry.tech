@@ -21,29 +21,31 @@ defineOgImage("Oumar", {
 
 <template>
   <main class="page-grid">
-    <section class="blog-shell">
-      <header class="blog-header">
-        <h1>Blog</h1>
-      </header>
+    <div class="site-rails content-rails">
+      <section class="content-panel">
+        <header class="blog-header">
+          <h1>blog</h1>
+        </header>
 
-      <div class="blog-list-wrap">
-        <ul v-if="posts?.length" class="post-list">
-          <li v-for="post in posts" :key="post.id">
-            <NuxtLink :to="post.path">
-              <span>{{ post.title }}</span>
-              <time>{{
-                new Date(post.date).toLocaleDateString("en", {
-                  year: "numeric",
-                  month: "short",
-                  day: "numeric",
-                })
-              }}</time>
-            </NuxtLink>
-          </li>
-        </ul>
+        <div class="blog-list-wrap">
+          <ul v-if="posts?.length" class="post-list">
+            <li v-for="post in posts" :key="post.id">
+              <NuxtLink :to="post.path">
+                <span>{{ post.title }}</span>
+                <time>{{
+                  new Date(post.date).toLocaleDateString("en", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  })
+                }}</time>
+              </NuxtLink>
+            </li>
+          </ul>
 
-        <p v-else class="muted">No published notes yet.</p>
-      </div>
-    </section>
+          <p v-else class="muted">nothing here yet. i'm working on the first post.</p>
+        </div>
+      </section>
+    </div>
   </main>
 </template>

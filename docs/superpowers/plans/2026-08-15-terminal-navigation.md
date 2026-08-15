@@ -4,7 +4,7 @@
 
 **Goal:** Add the approved terminal-style navigation commands to home, blog, article, and work pages while preserving the existing centered header, editorial copy, badges, and footer.
 
-**Architecture:** Create one stateless `TerminalNav.vue` presentational component with a typed `items` prop and scoped styles. Route pages provide small immutable command arrays; the home page keeps its richer editorial navigation and changes only its two visible command labels. Source-level tests follow the repository's current `node:test` pattern, and rendered-output tests verify Nuxt's production HTML.
+**Architecture:** Create one stateless `TerminalNav.vue` component with a typed `items` prop. Route pages provide small immutable command arrays; the home page keeps its richer editorial navigation and changes only its two command labels. Test user-visible navigation through Nuxt's prerendered HTML, then verify the responsive visual contract through computed styles in a real browser.
 
 **Tech Stack:** Nuxt 4, Vue 3 `<script setup lang="ts">`, `NuxtLink`, scoped CSS, Bun, Node's built-in test runner.
 
@@ -22,90 +22,95 @@
 
 ## File Map
 
-- Create `app/components/TerminalNav.vue`: render a stateless, accessible terminal command list and own its scoped visual treatment.
-- Create `tests/terminal-navigation.test.mjs`: protect the component contract, style requirements, page destinations, and placement.
-- Modify `package.json`: include the new source-level test file in the default `bun test` script.
+- Create `app/components/TerminalNav.vue`: render the typed terminal command list and own its scoped styles.
 - Modify `app/pages/index.vue`: change only the two editorial labels to `> cd /work` and `> cd /blog`.
-- Modify `app/pages/blog/index.vue`: provide home/work commands and render the strip after the blog list or empty state.
+- Modify `app/pages/blog/index.vue`: provide home/work commands and render the strip after the list or empty state.
 - Modify `app/pages/blog/[...slug].vue`: provide blog/work commands and render the strip after the article body.
 - Modify `app/pages/work.vue`: provide home/blog commands and render the strip after `work-closing`.
-- Modify `app/assets/styles/main.css`: let the existing work-closing divider replace the component's top border so the two lines do not double up.
-- Modify `tests/work-page.test.mjs`: update the existing assertions for the approved home command copy.
-- Modify `tests/rendered-work.test.mjs`: verify the terminal links in prerendered home, blog, and work HTML.
+- Modify `app/assets/styles/main.css`: prevent the work closing divider and terminal top border from doubling.
+- Modify `tests/work-page.test.mjs`: update the existing home command expectations.
+- Modify `tests/rendered-work.test.mjs`: verify actual prerendered home, blog, and work navigation.
 
 ---
 
-### Task 1: Build the Shared Terminal Navigation Component
+### Task 1: Add the Real Navigation Behavior
 
 **Files:**
 - Create: `app/components/TerminalNav.vue`
-- Create: `tests/terminal-navigation.test.mjs`
-- Modify: `package.json:7`
+- Modify: `app/pages/index.vue:79-103`
+- Modify: `app/pages/blog/index.vue:1-48`
+- Modify: `app/pages/blog/[...slug].vue:1-44`
+- Modify: `app/pages/work.vue:1-5,526-543`
+- Modify: `tests/work-page.test.mjs:144-170`
+- Modify: `tests/rendered-work.test.mjs:5-39`
 
 **Interfaces:**
-- Consumes: CSS custom properties `--content`, `--line`, `--text`, and `--dim`; Nuxt's auto-imported `NuxtLink`.
-- Produces: auto-imported `<TerminalNav :items="items" />`, where `items` is `readonly { label: string; to: string }[]`.
+- Consumes: Nuxt's auto-imported `NuxtLink`.
+- Produces: auto-imported `<TerminalNav :items="terminalItems" />`, where `items` is `readonly { label: string; to: string }[]`.
 - Emits: nothing. The component has no local state, effects, or composables.
 
-- [ ] **Step 1: Register the new test file in the default test command**
+- [ ] **Step 1: Write the failing prerendered navigation regression**
 
-Change the `test` script in `package.json` to:
-
-```json
-"test": "bun test tests/work-page.test.mjs tests/navigation-stats.test.mjs tests/terminal-navigation.test.mjs"
-```
-
-- [ ] **Step 2: Write the failing component contract and style tests**
-
-Create `tests/terminal-navigation.test.mjs` with:
+Add to the rendered page URL declarations in `tests/rendered-work.test.mjs`:
 
 ```js
-import assert from "node:assert/strict"
-import { readFile } from "node:fs/promises"
-import test from "node:test"
+const renderedBlog = new URL("../.output/public/blog/index.html", import.meta.url)
+```
 
-const root = new URL("../", import.meta.url)
-const terminalComponent = new URL("app/components/TerminalNav.vue", root)
+Update the existing rendered home expectations to require `&gt; cd /work` and `&gt; cd /blog`:
 
-test("terminal navigation exposes a typed, semantic link list", async () => {
-  const source = await readFile(terminalComponent, "utf8")
+```js
+assert.match(
+  home,
+  /href="\/work"[\s\S]*?&gt; cd \/work[\s\S]*?some of the stuff i&#39;ve built and the problems i ran into along the way\./i,
+)
+assert.match(
+  home,
+  /href="\/blog"[\s\S]*?&gt; cd \/blog[\s\S]*?notes on tech, manga, and whatever else is on my mind\./i,
+)
+```
 
-  assert.match(source, /interface TerminalNavItem\s*{[\s\S]*label: string[\s\S]*to: string/)
-  assert.match(source, /defineProps<{\s*items: readonly TerminalNavItem\[\]\s*}>\(\)/)
-  assert.match(
-    source,
-    /<nav class="terminal-nav" aria-label="terminal navigation">[\s\S]*<ul class="terminal-nav-list">/,
-  )
-  assert.match(source, /<li v-for="item in items" :key="item\.to">/)
-  assert.match(source, /<NuxtLink :to="item\.to" class="terminal-nav-link">/)
-})
+Add this behavior test:
 
-test("terminal navigation keeps its dotted, motionless responsive treatment", async () => {
-  const source = await readFile(terminalComponent, "utf8")
+```js
+test("prerendered blog and work pages expose their terminal exits", async () => {
+  const [blog, work] = await Promise.all([
+    readFile(renderedBlog, "utf8"),
+    readFile(renderedPage, "utf8"),
+  ])
 
-  assert.match(source, /<style scoped>/)
-  assert.match(source, /background-image:\s*radial-gradient/)
-  assert.match(source, /\.terminal-nav-link:hover/)
-  assert.match(source, /\.terminal-nav-link:focus-visible/)
-  assert.match(source, /@media \(max-width: 520px\)/)
-  assert.match(source, /flex-direction:\s*column/)
-  assert.doesNotMatch(source, /animation:|@keyframes|transform:|text-shadow:|box-shadow:/)
+  const blogNav = blog.match(
+    /<nav[^>]*class="[^"]*terminal-nav[^"]*"[^>]*aria-label="terminal navigation"[^>]*>[\s\S]*?<\/nav>/i,
+  )?.[0]
+  const workNav = work.match(
+    /<nav[^>]*class="[^"]*terminal-nav[^"]*"[^>]*aria-label="terminal navigation"[^>]*>[\s\S]*?<\/nav>/i,
+  )?.[0]
+
+  assert.ok(blogNav)
+  assert.match(blogNav, /href="\/"[^>]*>[\s\S]*?&gt; cd \.\./i)
+  assert.match(blogNav, /href="\/work"[^>]*>[\s\S]*?&gt; cd \/work/i)
+
+  assert.ok(workNav)
+  assert.match(workNav, /href="\/"[^>]*>[\s\S]*?&gt; cd \.\./i)
+  assert.match(workNav, /href="\/blog"[^>]*>[\s\S]*?&gt; cd \/blog/i)
 })
 ```
 
-- [ ] **Step 3: Run the component tests and verify the missing component fails**
+Update the existing source-level home assertions in `tests/work-page.test.mjs` to expect `&gt; cd /work` and `&gt; cd /blog`. This existing test protects the editorial descriptions and badges; it is not used to test the new component internals.
+
+- [ ] **Step 2: Run the rendered test and verify RED**
 
 Run:
 
 ```bash
-bun test tests/terminal-navigation.test.mjs
+bun run test:rendered
 ```
 
-Expected: FAIL with `ENOENT` for `app/components/TerminalNav.vue`.
+Expected: FAIL because the rendered home lacks `cd` and blog/work lack `nav.terminal-nav`.
 
-- [ ] **Step 4: Implement the stateless component and scoped styles**
+- [ ] **Step 3: Implement the stateless semantic component without its final visual styling**
 
-Create `app/components/TerminalNav.vue` with:
+Create `app/components/TerminalNav.vue`:
 
 ```vue
 <script setup lang="ts">
@@ -130,7 +135,100 @@ defineProps<{
     </ul>
   </nav>
 </template>
+```
 
+- [ ] **Step 4: Wire the approved command arrays into every page**
+
+Change only the home title strings:
+
+```vue
+<span class="home-editorial-title">&gt; cd /work</span>
+<span class="home-editorial-title">&gt; cd /blog</span>
+```
+
+Add to `app/pages/blog/index.vue` and render `<TerminalNav :items="terminalItems" />` after `.blog-list-wrap`:
+
+```ts
+const terminalItems = [
+  { label: "> cd ..", to: "/" },
+  { label: "> cd /work", to: "/work" },
+] as const
+```
+
+Add to `app/pages/blog/[...slug].vue` and render the component after `ContentRenderer`:
+
+```ts
+const terminalItems = [
+  { label: "> cd ..", to: "/blog" },
+  { label: "> cd /work", to: "/work" },
+] as const
+```
+
+Add to `app/pages/work.vue` and render the component after `.work-closing` and before the closing `.work-rails` div:
+
+```ts
+const terminalItems = [
+  { label: "> cd ..", to: "/" },
+  { label: "> cd /blog", to: "/blog" },
+] as const
+```
+
+- [ ] **Step 5: Format and verify GREEN through source and rendered behavior**
+
+Run:
+
+```bash
+bunx oxfmt app/components/TerminalNav.vue app/pages/index.vue app/pages/blog/index.vue 'app/pages/blog/[...slug].vue' app/pages/work.vue tests/work-page.test.mjs tests/rendered-work.test.mjs
+bun run test
+bun run test:rendered
+```
+
+Expected: all source and rendered tests PASS. The build inside `test:rendered` also type-checks and renders the component through Nuxt.
+
+- [ ] **Step 6: Commit behavior atomically**
+
+```bash
+git add app/components/TerminalNav.vue app/pages/index.vue app/pages/blog/index.vue 'app/pages/blog/[...slug].vue' app/pages/work.vue tests/work-page.test.mjs tests/rendered-work.test.mjs
+git commit -m "Add terminal navigation across pages"
+```
+
+---
+
+### Task 2: Apply and Verify the Approved Visual Treatment
+
+**Files:**
+- Modify: `app/components/TerminalNav.vue`
+- Modify: `app/assets/styles/main.css:409-413`
+
+**Interfaces:**
+- Consumes: the semantic component and route integration from Task 1.
+- Produces: dotted, motionless, responsive styling using existing CSS variables only.
+
+- [ ] **Step 1: Start the feature worktree server on a free port**
+
+Run:
+
+```bash
+bun run dev -- --port 3102
+```
+
+Use `/blog` as the visual test surface because it always renders the compact strip, even with no posts.
+
+- [ ] **Step 2: Verify the unstyled component does not yet satisfy the visual contract**
+
+At desktop width, inspect computed styles for `.terminal-nav` and `.terminal-nav-list`.
+
+Expected RED evidence before styling:
+
+- `.terminal-nav` has no radial-gradient background.
+- `.terminal-nav-link` does not have a `44px` minimum height.
+- the mobile list does not change to `flex-direction: column`.
+
+- [ ] **Step 3: Add the exact scoped component styles**
+
+Append to `app/components/TerminalNav.vue`:
+
+```vue
 <style scoped>
 .terminal-nav {
   width: min(100%, var(--content));
@@ -181,189 +279,7 @@ defineProps<{
 </style>
 ```
 
-- [ ] **Step 5: Format and rerun the focused tests**
-
-Run:
-
-```bash
-bunx oxfmt app/components/TerminalNav.vue tests/terminal-navigation.test.mjs package.json
-bun test tests/terminal-navigation.test.mjs
-```
-
-Expected: both tests PASS.
-
-- [ ] **Step 6: Commit the shared component atomically**
-
-```bash
-git add app/components/TerminalNav.vue tests/terminal-navigation.test.mjs package.json
-git commit -m "Add shared terminal navigation"
-```
-
----
-
-### Task 2: Add Commands to Home, Blog, Articles, and Work
-
-**Files:**
-- Modify: `tests/terminal-navigation.test.mjs`
-- Modify: `tests/work-page.test.mjs:144-170`
-- Modify: `app/pages/index.vue:79-103`
-- Modify: `app/pages/blog/index.vue:1-48`
-- Modify: `app/pages/blog/[...slug].vue:1-44`
-- Modify: `app/pages/work.vue:1-5,526-543`
-- Modify: `app/assets/styles/main.css:409-413`
-
-**Interfaces:**
-- Consumes: `<TerminalNav :items="terminalItems" />` from Task 1.
-- Produces: `terminalItems` immutable arrays with exact `{ label, to }` pairs for blog, article, and work.
-- Home remains an editorial `nav`; only its two visible command labels change.
-
-- [ ] **Step 1: Add failing source-level page integration tests**
-
-Append to `tests/terminal-navigation.test.mjs`:
-
-```js
-test("home keeps editorial navigation and exposes cd commands", async () => {
-  const source = await readFile(new URL("app/pages/index.vue", root), "utf8")
-
-  assert.match(source, /to="\/work"[\s\S]*&gt; cd \/work[\s\S]*class="status-badge">building/)
-  assert.match(source, /to="\/blog"[\s\S]*&gt; cd \/blog[\s\S]*class="status-badge">soon/)
-  assert.doesNotMatch(source, /<TerminalNav/)
-})
-
-test("blog and article terminal exits use their correct parent routes", async () => {
-  const [blog, article] = await Promise.all([
-    readFile(new URL("app/pages/blog/index.vue", root), "utf8"),
-    readFile(new URL("app/pages/blog/[...slug].vue", root), "utf8"),
-  ])
-
-  assert.match(blog, /{ label: "> cd \.\.", to: "\/" }/)
-  assert.match(blog, /{ label: "> cd \/work", to: "\/work" }/)
-  assert.match(blog, /blog-list-wrap[\s\S]*<TerminalNav :items="terminalItems" \/>/)
-
-  assert.match(article, /{ label: "> cd \.\.", to: "\/blog" }/)
-  assert.match(article, /{ label: "> cd \/work", to: "\/work" }/)
-  assert.match(article, /<ContentRenderer[\s\S]*<TerminalNav :items="terminalItems" \/>/)
-})
-
-test("work closes with home and blog terminal commands", async () => {
-  const [source, styles] = await Promise.all([
-    readFile(new URL("app/pages/work.vue", root), "utf8"),
-    readFile(new URL("app/assets/styles/main.css", root), "utf8"),
-  ])
-  const closingPosition = source.indexOf('<section class="work-closing"')
-  const terminalPosition = source.indexOf('<TerminalNav :items="terminalItems" />')
-
-  assert.match(source, /{ label: "> cd \.\.", to: "\/" }/)
-  assert.match(source, /{ label: "> cd \/blog", to: "\/blog" }/)
-  assert.ok(closingPosition >= 0)
-  assert.ok(terminalPosition > closingPosition)
-  assert.match(styles, /\.work-closing \+ \.terminal-nav\s*{[^}]*border-top:\s*0/)
-})
-```
-
-Update the two existing home assertions in `tests/work-page.test.mjs` so they expect `&gt; cd /work` and `&gt; cd /blog`:
-
-```js
-  assert.match(
-    home,
-    /to="\/work"[\s\S]*&gt; cd \/work[\s\S]*some of the stuff i've built and the problems i ran into along the way\./i,
-  )
-  assert.match(
-    home,
-    /to="\/blog"[\s\S]*&gt; cd \/blog[\s\S]*notes on tech, manga, and whatever else is on my mind\./i,
-  )
-```
-
-- [ ] **Step 2: Run the source tests and verify the old labels and missing strips fail**
-
-Run:
-
-```bash
-bun test tests/terminal-navigation.test.mjs tests/work-page.test.mjs
-```
-
-Expected: FAIL because home still says `> work` / `> blog` and route pages do not yet contain `terminalItems` or `<TerminalNav>`.
-
-- [ ] **Step 3: Update the two home command labels only**
-
-In `app/pages/index.vue`, replace:
-
-```vue
-<span class="home-editorial-title">&gt; work</span>
-```
-
-with:
-
-```vue
-<span class="home-editorial-title">&gt; cd /work</span>
-```
-
-Replace:
-
-```vue
-<span class="home-editorial-title">&gt; blog</span>
-```
-
-with:
-
-```vue
-<span class="home-editorial-title">&gt; cd /blog</span>
-```
-
-Do not change either link wrapper, description, or badge.
-
-- [ ] **Step 4: Add the blog index commands and strip**
-
-In `app/pages/blog/index.vue`, add after the `useAsyncData` block:
-
-```ts
-const terminalItems = [
-  { label: "> cd ..", to: "/" },
-  { label: "> cd /work", to: "/work" },
-] as const
-```
-
-Render the component after `.blog-list-wrap` and before `</section>`:
-
-```vue
-<TerminalNav :items="terminalItems" />
-```
-
-- [ ] **Step 5: Add the article commands and strip**
-
-In `app/pages/blog/[...slug].vue`, add after `const route = useRoute()`:
-
-```ts
-const terminalItems = [
-  { label: "> cd ..", to: "/blog" },
-  { label: "> cd /work", to: "/work" },
-] as const
-```
-
-Render the component immediately after `ContentRenderer` and before `</article>`:
-
-```vue
-<TerminalNav :items="terminalItems" />
-```
-
-- [ ] **Step 6: Add the work commands and closing strip**
-
-In `app/pages/work.vue`, add after `description`:
-
-```ts
-const terminalItems = [
-  { label: "> cd ..", to: "/" },
-  { label: "> cd /blog", to: "/blog" },
-] as const
-```
-
-Render the component after the closing `</section>` for `.work-closing` and before the closing `.work-rails` `</div>`:
-
-```vue
-<TerminalNav :items="terminalItems" />
-```
-
-In `app/assets/styles/main.css`, add immediately after the shared `.work-hero`, `.story-act`, `.work-closing` border rule:
+Add to `app/assets/styles/main.css` immediately after the shared work section border rule:
 
 ```css
 .work-closing + .terminal-nav {
@@ -371,152 +287,59 @@ In `app/assets/styles/main.css`, add immediately after the shared `.work-hero`, 
 }
 ```
 
-The existing full-width bottom border on `.work-closing` remains the divider, while the compact strip keeps its own top border on blog and article pages.
+The existing full-width border below `.work-closing` remains the divider, avoiding a double line.
 
-- [ ] **Step 7: Format and run the full source-level suite**
+- [ ] **Step 4: Verify the computed styles and interactions GREEN**
 
-Run:
+At approximately `1440 × 900`, verify on `/blog`:
 
-```bash
-bunx oxfmt app/pages/index.vue app/pages/blog/index.vue 'app/pages/blog/[...slug].vue' app/pages/work.vue app/assets/styles/main.css tests/terminal-navigation.test.mjs tests/work-page.test.mjs
-bun test
-```
+- `background-image` contains `radial-gradient`.
+- links share one row.
+- each link reports `min-height: 44px`.
+- hovering one link brightens and underlines only that link.
+- keyboard focus shows a dashed outline.
 
-Expected: all source-level tests PASS.
+At approximately `390 × 844`, verify:
 
-- [ ] **Step 8: Commit page integration atomically**
+- `.terminal-nav-list` reports `flex-direction: column`.
+- both links remain fully visible and left-aligned.
+- the dotted texture is clipped to the content strip.
 
-```bash
-git add app/pages/index.vue app/pages/blog/index.vue 'app/pages/blog/[...slug].vue' app/pages/work.vue app/assets/styles/main.css tests/terminal-navigation.test.mjs tests/work-page.test.mjs
-git commit -m "Add terminal navigation across pages"
-```
+Then inspect `/` and `/work`:
 
----
-
-### Task 3: Verify Production Rendering and Responsive Presentation
-
-**Files:**
-- Modify: `tests/rendered-work.test.mjs:7-11,13-39`
-
-**Interfaces:**
-- Consumes: prerendered HTML from `bun run build` and the page/component integration from Task 2.
-- Produces: production-output regression coverage for home, blog, and work terminal navigation.
-
-- [ ] **Step 1: Point the rendered tests at the blog output**
-
-Add beside the existing rendered page URLs in `tests/rendered-work.test.mjs`:
-
-```js
-const renderedBlog = new URL("../.output/public/blog/index.html", import.meta.url)
-```
-
-- [ ] **Step 2: Add the rendered terminal navigation test while leaving the stale home expectations in place**
-
-Add this test below the existing centered-header test:
-
-```js
-test("prerendered blog and work pages expose their terminal exits", async () => {
-  const [blog, work] = await Promise.all([
-    readFile(renderedBlog, "utf8"),
-    readFile(renderedPage, "utf8"),
-  ])
-
-  const blogNav = blog.match(
-    /<nav[^>]*class="[^"]*terminal-nav[^"]*"[^>]*aria-label="terminal navigation"[^>]*>[\s\S]*?<\/nav>/i,
-  )?.[0]
-  const workNav = work.match(
-    /<nav[^>]*class="[^"]*terminal-nav[^"]*"[^>]*aria-label="terminal navigation"[^>]*>[\s\S]*?<\/nav>/i,
-  )?.[0]
-
-  assert.ok(blogNav)
-  assert.match(blogNav, /href="\/"[^>]*>[\s\S]*?&gt; cd \.\./i)
-  assert.match(blogNav, /href="\/work"[^>]*>[\s\S]*?&gt; cd \/work/i)
-
-  assert.ok(workNav)
-  assert.match(workNav, /href="\/"[^>]*>[\s\S]*?&gt; cd \.\./i)
-  assert.match(workNav, /href="\/blog"[^>]*>[\s\S]*?&gt; cd \/blog/i)
-})
-```
-
-- [ ] **Step 3: Run rendered tests once and confirm the stale home expectations fail**
-
-Run the test before changing its old home expectations:
-
-```bash
-bun run test:rendered
-```
-
-Expected: FAIL on the existing rendered home regexes because the production home now contains `cd`; the new blog/work terminal test should pass.
-
-- [ ] **Step 4: Update the rendered home expectations and rerun the rendered suite**
-
-In the existing centered-header test, update the two home regexes to expect `&gt; cd /work` and `&gt; cd /blog`:
-
-```js
-  assert.match(
-    home,
-    /href="\/work"[\s\S]*?&gt; cd \/work[\s\S]*?some of the stuff i&#39;ve built and the problems i ran into along the way\./i,
-  )
-  assert.match(
-    home,
-    /href="\/blog"[\s\S]*?&gt; cd \/blog[\s\S]*?notes on tech, manga, and whatever else is on my mind\./i,
-  )
-```
-
-Rerun:
-
-```bash
-bun run test:rendered
-```
-
-Expected: all rendered tests PASS after the automatic production build.
+- home retains descriptions and badges with no compact strip.
+- work places the strip after `let's talk`, before the footer, with one divider rather than two.
 
 - [ ] **Step 5: Run the complete automated quality gate**
 
 Run:
 
 ```bash
+bunx oxfmt app/components/TerminalNav.vue app/assets/styles/main.css
 bun run format:check
 bun run lint
-bun test
+bun run test
 bun run build
 bun run test:rendered
 ```
 
-Expected: every command exits successfully with no formatting, lint, source-test, build, or rendered-test errors.
+Expected: every command exits successfully.
 
-- [ ] **Step 6: Verify the approved layout visually**
-
-Use the running local site, or start it with:
+- [ ] **Step 6: Commit visual treatment atomically**
 
 ```bash
-bun run dev -- --port 3101
-```
-
-Inspect these routes at approximately `1440 × 900` and `390 × 844`:
-
-- `/`: `> cd /work` and `> cd /blog` retain their descriptions and badges; there is no compact terminal strip.
-- `/blog`: the dotted strip follows the empty state or post list; `cd ..` and `cd /work` are horizontal on desktop and stacked on mobile.
-- `/work`: the dotted strip follows `let's talk` and appears before the shared footer; commands are `cd ..` and `cd /blog`.
-- A real article route when content exists: the strip follows the article body, and `cd ..` returns to `/blog`.
-
-Keyboard-tab through each command and confirm focus is visible. Hover one command and confirm only that link brightens and underlines; the strip must not animate or glow.
-
-- [ ] **Step 7: Commit production verification atomically**
-
-```bash
-git add tests/rendered-work.test.mjs
-git commit -m "Verify rendered terminal navigation"
+git add app/components/TerminalNav.vue app/assets/styles/main.css
+git commit -m "Style terminal navigation"
 ```
 
 ---
 
 ## Completion Criteria
 
-- Home displays `> cd /work` and `> cd /blog` without losing its descriptions or status badges.
+- Home displays `> cd /work` and `> cd /blog` without losing descriptions or badges.
 - Blog index displays `cd .. → /` and `cd /work → /work` after its content.
 - Blog articles display `cd .. → /blog` and `cd /work → /work` after article content.
 - Work displays `cd .. → /` and `cd /blog → /blog` after `let's talk` and before the footer.
 - `TerminalNav.vue` remains stateless, typed, semantic, motionless, and dependency-free.
-- Desktop and mobile layouts match the approved option A.
-- Three implementation commits remain independently reviewable.
+- Desktop and mobile layouts match approved option A.
+- Behavior and visual treatment remain independently reviewable commits.

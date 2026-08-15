@@ -77,7 +77,7 @@ the memorable detail is the dotted terminal exit, not a new color, glow, animati
 ## interaction
 
 - every command is a real internal link with the full command text as its hit target.
-- on hover, shift only the command text from the site's muted gray to its brighter text color, without adding an underline or background highlight.
+- on hover, shift only the `cd …` text from the site's muted gray to its brighter text color and underline it. the `>` prompt stays muted and unadorned.
 - do not move, rotate, scale, glow, or highlight the entire strip on hover.
 - preserve a clear `:focus-visible` outline that works independently of color.
 - mark the current destination only when needed in the future; this iteration contains no self-links.

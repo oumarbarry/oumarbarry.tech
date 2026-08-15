@@ -251,11 +251,11 @@ test("the shared header stays minimal while the homepage carries editorial navig
   assert.match(home, /class="home-editorial-nav"/)
   assert.match(
     home,
-    /to="\/work"[\s\S]*&gt; cd \/work[\s\S]*some of the stuff i've built and the problems i ran into along the way\./i,
+    /to="\/work"[\s\S]*?class="home-editorial-prompt"[^>]*>&gt;<\/span>[\s\S]*?class="home-editorial-command-text"[^>]*>cd \/work<\/span>[\s\S]*?some of the stuff i've built and the problems i ran into along the way\./i,
   )
   assert.match(
     home,
-    /to="\/blog"[\s\S]*&gt; cd \/blog[\s\S]*notes on tech, manga, and whatever else is on my mind\./i,
+    /to="\/blog"[\s\S]*?class="home-editorial-prompt"[^>]*>&gt;<\/span>[\s\S]*?class="home-editorial-command-text"[^>]*>cd \/blog<\/span>[\s\S]*?notes on tech, manga, and whatever else is on my mind\./i,
   )
   assert.match(home, /to="https:\/\/github\.com\/oumarbarry"/i)
   assert.match(config, /"\/work"\s*:\s*\{\s*prerender:\s*true,\s*ogImage:\s*false\s*\}/)

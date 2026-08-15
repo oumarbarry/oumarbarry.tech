@@ -46,7 +46,7 @@
 
 **Interfaces:**
 - Consumes: Nuxt's auto-imported `NuxtLink`.
-- Produces: auto-imported `<TerminalNav :items="terminalItems" />`, where `items` is `readonly { label: string; to: string }[]`.
+- Produces: auto-imported `<TerminalNav :items="terminalItems" />`, where `items` is `readonly { command: string; to: string }[]`.
 - Emits: nothing. The component has no local state, effects, or composables.
 
 - [ ] **Step 1: Write the failing prerendered navigation regression**
@@ -115,7 +115,7 @@ Create `app/components/TerminalNav.vue`:
 ```vue
 <script setup lang="ts">
 interface TerminalNavItem {
-  label: string
+  command: string
   to: string
 }
 
@@ -129,7 +129,8 @@ defineProps<{
     <ul class="terminal-nav-list">
       <li v-for="item in items" :key="item.to">
         <NuxtLink :to="item.to" class="terminal-nav-link">
-          {{ item.label }}
+          <span class="terminal-nav-prompt" aria-hidden="true">&gt;</span>
+          <span class="terminal-nav-command">{{ item.command }}</span>
         </NuxtLink>
       </li>
     </ul>
@@ -139,19 +140,25 @@ defineProps<{
 
 - [ ] **Step 4: Wire the approved command arrays into every page**
 
-Change only the home title strings:
+Split the prompt from each home command so hover styling can target only `cd …`:
 
 ```vue
-<span class="home-editorial-title">&gt; cd /work</span>
-<span class="home-editorial-title">&gt; cd /blog</span>
+<span class="home-editorial-title">
+  <span class="home-editorial-prompt" aria-hidden="true">&gt;</span>
+  <span class="home-editorial-command-text">cd /work</span>
+</span>
+<span class="home-editorial-title">
+  <span class="home-editorial-prompt" aria-hidden="true">&gt;</span>
+  <span class="home-editorial-command-text">cd /blog</span>
+</span>
 ```
 
 Add to `app/pages/blog/index.vue` and render `<TerminalNav :items="terminalItems" />` after `.blog-list-wrap`:
 
 ```ts
 const terminalItems = [
-  { label: "> cd ..", to: "/" },
-  { label: "> cd /work", to: "/work" },
+  { command: "cd ..", to: "/" },
+  { command: "cd /work", to: "/work" },
 ] as const
 ```
 
@@ -159,8 +166,8 @@ Add to `app/pages/blog/[...slug].vue` and render the component after `ContentRen
 
 ```ts
 const terminalItems = [
-  { label: "> cd ..", to: "/blog" },
-  { label: "> cd /work", to: "/work" },
+  { command: "cd ..", to: "/blog" },
+  { command: "cd /work", to: "/work" },
 ] as const
 ```
 
@@ -168,8 +175,8 @@ Add to `app/pages/work.vue` and render the component after `.work-closing` and b
 
 ```ts
 const terminalItems = [
-  { label: "> cd ..", to: "/" },
-  { label: "> cd /blog", to: "/blog" },
+  { command: "cd ..", to: "/" },
+  { command: "cd /blog", to: "/blog" },
 ] as const
 ```
 
@@ -253,14 +260,24 @@ Append to `app/components/TerminalNav.vue`:
   display: inline-flex;
   min-height: 44px;
   align-items: center;
+  gap: 0.45rem;
   color: var(--dim);
   font-size: 0.82rem;
   text-decoration: none;
+}
+
+.terminal-nav-prompt,
+.terminal-nav-command {
+  color: var(--dim);
+}
+
+.terminal-nav-command {
   text-underline-offset: 0.22em;
 }
 
-.terminal-nav-link:hover {
+.terminal-nav-link:hover .terminal-nav-command {
   color: var(--text);
+  text-decoration: underline;
 }
 
 .terminal-nav-link:focus-visible {
@@ -295,7 +312,7 @@ At approximately `1440 × 900`, verify on `/blog`:
 - `background-image` contains `radial-gradient`.
 - links share one row.
 - each link reports `min-height: 44px`.
-- hovering one link brightens only that command text and leaves the other command muted.
+- hovering one link brightens and underlines only its `cd …` text; its `>` prompt and the other command remain muted.
 - keyboard focus shows a dashed outline.
 
 At approximately `390 × 844`, verify:

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 interface TerminalNavItem {
-  label: string
+  command: string
   to: string
 }
 
@@ -14,7 +14,8 @@ defineProps<{
     <ul class="terminal-nav-list">
       <li v-for="item in items" :key="item.to">
         <NuxtLink :to="item.to" class="terminal-nav-link">
-          {{ item.label }}
+          <span class="terminal-nav-prompt" aria-hidden="true">&gt;</span>
+          <span class="terminal-nav-command">{{ item.command }}</span>
         </NuxtLink>
       </li>
     </ul>
@@ -45,14 +46,24 @@ defineProps<{
   display: inline-flex;
   min-height: 44px;
   align-items: center;
+  gap: 0.45rem;
   color: var(--dim);
   font-size: 0.82rem;
   text-decoration: none;
+}
+
+.terminal-nav-prompt,
+.terminal-nav-command {
+  color: var(--dim);
+}
+
+.terminal-nav-command {
   text-underline-offset: 0.22em;
 }
 
-.terminal-nav-link:hover {
+.terminal-nav-link:hover .terminal-nav-command {
   color: var(--text);
+  text-decoration: underline;
 }
 
 .terminal-nav-link:focus-visible {

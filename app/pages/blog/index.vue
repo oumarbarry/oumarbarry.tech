@@ -4,8 +4,8 @@ const { data: posts } = await useAsyncData("blog-posts", () => {
 })
 
 const terminalItems = [
-  { label: "> cd ..", to: "/" },
-  { label: "> cd /work", to: "/work" },
+  { command: "cd ..", to: "/" },
+  { command: "cd /work", to: "/work" },
 ] as const
 
 useSeoMeta({

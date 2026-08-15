@@ -2,8 +2,8 @@
 const route = useRoute()
 
 const terminalItems = [
-  { label: "> cd ..", to: "/blog" },
-  { label: "> cd /work", to: "/work" },
+  { command: "cd ..", to: "/blog" },
+  { command: "cd /work", to: "/work" },
 ] as const
 
 const { data: post } = await useAsyncData(`blog-${route.path}`, () => {

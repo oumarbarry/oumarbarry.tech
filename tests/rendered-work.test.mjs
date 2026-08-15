@@ -28,11 +28,11 @@ test("rendered home and work pages share a centered brand-only header", async ()
   assert.match(home, /<nav class="home-editorial-nav"[^>]*>/i)
   assert.match(
     home,
-    /href="\/work"[\s\S]*?&gt; cd \/work[\s\S]*?some of the stuff i&#39;ve built and the problems i ran into along the way\./i,
+    /href="\/work"[\s\S]*?&gt;[\s\S]*?cd \/work[\s\S]*?some of the stuff i&#39;ve built and the problems i ran into along the way\./i,
   )
   assert.match(
     home,
-    /href="\/blog"[\s\S]*?&gt; cd \/blog[\s\S]*?notes on tech, manga, and whatever else is on my mind\./i,
+    /href="\/blog"[\s\S]*?&gt;[\s\S]*?cd \/blog[\s\S]*?notes on tech, manga, and whatever else is on my mind\./i,
   )
   assert.match(home, /href="https:\/\/github\.com\/oumarbarry"/i)
 })
@@ -43,11 +43,17 @@ test("home links only the terminal commands, not their supporting copy", async (
   const blogLink = home.match(/<a href="\/blog"[^>]*>[\s\S]*?<\/a>/i)?.[0]
 
   assert.ok(workLink)
-  assert.match(workLink, /&gt; cd \/work/i)
+  assert.match(
+    workLink,
+    /<span class="home-editorial-prompt"[^>]*>&gt;<\/span><span class="home-editorial-command-text"[^>]*>cd \/work<\/span>/i,
+  )
   assert.doesNotMatch(workLink, /some of the stuff i've built/i)
 
   assert.ok(blogLink)
-  assert.match(blogLink, /&gt; cd \/blog/i)
+  assert.match(
+    blogLink,
+    /<span class="home-editorial-prompt"[^>]*>&gt;<\/span><span class="home-editorial-command-text"[^>]*>cd \/blog<\/span>/i,
+  )
   assert.doesNotMatch(blogLink, /notes on tech, manga/i)
 })
 
@@ -65,12 +71,24 @@ test("prerendered blog and work pages expose their terminal exits", async () => 
   )?.[0]
 
   assert.ok(blogNav)
-  assert.match(blogNav, /href="\/"[^>]*>[\s\S]*?&gt; cd \.\./i)
-  assert.match(blogNav, /href="\/work"[^>]*>[\s\S]*?&gt; cd \/work/i)
+  assert.match(
+    blogNav,
+    /href="\/"[^>]*>[\s\S]*?<span class="terminal-nav-prompt"[^>]*>&gt;<\/span><span class="terminal-nav-command"[^>]*>cd \.\.<\/span>/i,
+  )
+  assert.match(
+    blogNav,
+    /href="\/work"[^>]*>[\s\S]*?<span class="terminal-nav-prompt"[^>]*>&gt;<\/span><span class="terminal-nav-command"[^>]*>cd \/work<\/span>/i,
+  )
 
   assert.ok(workNav)
-  assert.match(workNav, /href="\/"[^>]*>[\s\S]*?&gt; cd \.\./i)
-  assert.match(workNav, /href="\/blog"[^>]*>[\s\S]*?&gt; cd \/blog/i)
+  assert.match(
+    workNav,
+    /href="\/"[^>]*>[\s\S]*?<span class="terminal-nav-prompt"[^>]*>&gt;<\/span><span class="terminal-nav-command"[^>]*>cd \.\.<\/span>/i,
+  )
+  assert.match(
+    workNav,
+    /href="\/blog"[^>]*>[\s\S]*?<span class="terminal-nav-prompt"[^>]*>&gt;<\/span><span class="terminal-nav-command"[^>]*>cd \/blog<\/span>/i,
+  )
 })
 
 test("prerendered work page contains the five-act public portfolio", async () => {

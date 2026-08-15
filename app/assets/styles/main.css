@@ -331,8 +331,8 @@ p + p {
   text-decoration: none;
 }
 
-.home-editorial-command:hover .home-editorial-title {
-  color: var(--muted);
+.home-editorial-command:hover .home-editorial-command-text {
+  color: var(--text);
   text-decoration: underline;
   text-underline-offset: 0.22em;
 }
@@ -350,9 +350,16 @@ p + p {
 }
 
 .home-editorial-title {
-  color: var(--text);
+  display: inline-flex;
+  gap: 0.45rem;
+  color: var(--dim);
   font-size: 0.92rem;
   font-weight: 700;
+}
+
+.home-editorial-prompt,
+.home-editorial-command-text {
+  color: var(--dim);
 }
 
 .home-editorial-description {

@@ -6,8 +6,8 @@ const description =
   "AI products, open-source developer tools, payment systems and internet infrastructure built by Oumar Barry in Conakry, Guinea, West Africa."
 
 const terminalItems = [
-  { label: "> cd ..", to: "/" },
-  { label: "> cd /blog", to: "/blog" },
+  { command: "cd ..", to: "/" },
+  { command: "cd /blog", to: "/blog" },
 ] as const
 
 useSeoMeta({

@@ -80,7 +80,10 @@
             <div class="home-editorial-item">
               <span class="home-editorial-heading">
                 <NuxtLink to="/work" class="home-editorial-command">
-                  <span class="home-editorial-title">&gt; cd /work</span>
+                  <span class="home-editorial-title">
+                    <span class="home-editorial-prompt" aria-hidden="true">&gt;</span>
+                    <span class="home-editorial-command-text">cd /work</span>
+                  </span>
                 </NuxtLink>
                 <span class="status-badge">building</span>
               </span>
@@ -91,7 +94,10 @@
             <div class="home-editorial-item">
               <span class="home-editorial-heading">
                 <NuxtLink to="/blog" class="home-editorial-command">
-                  <span class="home-editorial-title">&gt; cd /blog</span>
+                  <span class="home-editorial-title">
+                    <span class="home-editorial-prompt" aria-hidden="true">&gt;</span>
+                    <span class="home-editorial-command-text">cd /blog</span>
+                  </span>
                 </NuxtLink>
                 <span class="status-badge">soon</span>
               </span>

@@ -412,6 +412,10 @@ p + p {
   border-bottom: 1px solid var(--line);
 }
 
+.work-closing + .terminal-nav {
+  border-top: 0;
+}
+
 .work-hero {
   display: grid;
   grid-template-rows: repeat(4, auto);

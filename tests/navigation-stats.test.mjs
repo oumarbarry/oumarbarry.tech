@@ -50,7 +50,7 @@ function createSchedulerFixture(readyState) {
   }
 }
 
-test("preserves the browser-reported navigation protocol", () => {
+test("normalizes browser protocol identifiers for display", () => {
   const stats = formatNavigationStats({
     nextHopProtocol: " h3 ",
     transferSize: 0,
@@ -60,13 +60,13 @@ test("preserves the browser-reported navigation protocol", () => {
   })
 
   assert.deepEqual(stats, {
-    protocol: "h3",
+    protocol: "http/3",
     transfer: "0 bytes",
     ttfb: "47.6 ms",
     duration: "803.4 ms",
   })
 
-  assert.equal(formatNavigationStats({ nextHopProtocol: "h2" }).protocol, "h2")
+  assert.equal(formatNavigationStats({ nextHopProtocol: "h2" }).protocol, "http/2")
   assert.equal(formatNavigationStats({ nextHopProtocol: "http/1.1" }).protocol, "http/1.1")
   assert.equal(formatNavigationStats({ nextHopProtocol: "custom" }).protocol, "custom")
 })

@@ -20,12 +20,16 @@ export interface NavigationMeasurementSchedulerDependencies {
 }
 
 const unavailable = "unavailable"
+const protocolLabels: Record<string, string> = {
+  h2: "http/2",
+  h3: "http/3",
+}
 
 const formatMilliseconds = (value: number) => `${value.toFixed(1)} ms`
 
 const formatProtocol = (value: unknown) => {
   const protocol = typeof value === "string" ? value.trim() : ""
-  return protocol || unavailable
+  return protocol ? (protocolLabels[protocol] ?? protocol) : unavailable
 }
 
 const isNonNegativeNumber = (value: unknown): value is number =>

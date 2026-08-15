@@ -145,6 +145,10 @@ export default defineNuxtConfig({
   },
 
   $production: {
+    sourcemap: {
+      server: false,
+      client: false,
+    },
     scripts: {
       registry: {
         umamiAnalytics: {

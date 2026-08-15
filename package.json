@@ -6,7 +6,7 @@
     "dev": "nuxt dev",
     "build": "nuxt build",
     "preview": "nuxt preview",
-    "test": "bun test tests/work-page.test.mjs tests/navigation-stats.test.mjs",
+    "test": "bun test tests/work-page.test.mjs tests/navigation-stats.test.mjs tests/nuxt-config.test.mjs",
     "pretest:rendered": "bun run build",
     "test:rendered": "node --test tests/rendered-work.test.mjs",
     "postinstall": "nuxt prepare",

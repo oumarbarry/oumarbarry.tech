@@ -131,7 +131,7 @@ test("finance, production infrastructure and the wider portfolio stay distinct",
   assert.doesNotMatch(normalized, /staff operations/i)
   assert.doesNotMatch(normalized, /lock-screen controls/i)
   assert.match(normalized, /SuperBudget/i)
-  assert.match(normalized, /O3Health/i)
+  assert.match(source, /<h3>o3health<\/h3>/)
   assert.match(normalized, /Afromaps/i)
   assert.match(normalized, /PointGN/i)
   assert.match(

@@ -465,7 +465,7 @@ onBeforeUnmount(() => {
 
             <article class="map-card reveal-delay-1" data-reveal>
               <p class="map-card-index">02 / Health</p>
-              <h3>O3Health</h3>
+              <h3>o3health</h3>
               <p>
                 An offline clinic assistant for places without reliable internet. Deterministic code
                 handles triage and dosing; a local LLM explains and translates but never makes

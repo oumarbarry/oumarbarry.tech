@@ -59,6 +59,21 @@
               </span>
             </li>
           </ul>
+
+          <nav class="home-editorial-nav" aria-label="Explore this site">
+            <NuxtLink to="/work" class="home-editorial-link">
+              <span class="home-editorial-title">&gt; work</span>
+              <span class="home-editorial-description">
+                some of the stuff i've built and the problems i ran into along the way.
+              </span>
+            </NuxtLink>
+            <NuxtLink to="/blog" class="home-editorial-link">
+              <span class="home-editorial-title">&gt; blog</span>
+              <span class="home-editorial-description">
+                notes on tech, manga, and whatever else is on my mind.
+              </span>
+            </NuxtLink>
+          </nav>
         </article>
       </section>
     </div>

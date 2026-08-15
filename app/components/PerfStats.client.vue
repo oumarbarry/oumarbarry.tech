@@ -1,46 +1,48 @@
 <script setup lang="ts">
-const stats = ref<{
-  protocol: string
-  transfer: string
-  request: string
-  duration: string
-} | null>(null)
+import {
+  createNavigationMeasurementScheduler,
+  formatNavigationStats,
+  type NavigationStats,
+  type NavigationTimingLike,
+} from "~/utils/navigationStats"
 
-onMounted(() => {
-  const navigation = performance.getEntriesByType("navigation")[0] as
-    | PerformanceNavigationTiming
-    | undefined
+const stats = ref<NavigationStats | null>(null)
 
-  if (!navigation) return
+const scheduler = createNavigationMeasurementScheduler({
+  document,
+  window,
+  measure: () => {
+    const navigation = performance.getEntriesByType("navigation")[0] as
+      | PerformanceNavigationTiming
+      | undefined
 
-  stats.value = {
-    protocol: navigation.nextHopProtocol || "n/a",
-    transfer: navigation.transferSize ? `${navigation.transferSize} bytes` : "cached",
-    request: `${Math.max(0, navigation.responseStart - navigation.requestStart).toFixed(1)} ms`,
-    duration: `${navigation.duration.toFixed(1)} ms`,
-  }
+    stats.value = formatNavigationStats((navigation ?? {}) as NavigationTimingLike)
+  },
 })
+
+onMounted(scheduler.start)
+onBeforeUnmount(scheduler.cleanup)
 </script>
 
 <template>
-  <details class="perf-stats">
+  <details class="perf-stats" open>
     <summary>Perf Stats</summary>
 
     <dl v-if="stats">
       <div>
-        <dt>Protocol:</dt>
+        <dt>Protocol</dt>
         <dd>{{ stats.protocol }}</dd>
       </div>
       <div>
-        <dt>Transfer:</dt>
+        <dt>Transfer</dt>
         <dd>{{ stats.transfer }}</dd>
       </div>
       <div>
-        <dt>Request:</dt>
-        <dd>{{ stats.request }}</dd>
+        <dt>TTFB</dt>
+        <dd>{{ stats.ttfb }}</dd>
       </div>
       <div>
-        <dt>Duration:</dt>
+        <dt>Page load</dt>
         <dd>{{ stats.duration }}</dd>
       </div>
     </dl>

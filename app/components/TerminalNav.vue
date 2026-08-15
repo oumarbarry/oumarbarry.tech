@@ -53,7 +53,6 @@ defineProps<{
 
 .terminal-nav-link:hover {
   color: var(--text);
-  text-decoration: underline;
 }
 
 .terminal-nav-link:focus-visible {

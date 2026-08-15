@@ -261,7 +261,6 @@ Append to `app/components/TerminalNav.vue`:
 
 .terminal-nav-link:hover {
   color: var(--text);
-  text-decoration: underline;
 }
 
 .terminal-nav-link:focus-visible {
@@ -296,7 +295,7 @@ At approximately `1440 × 900`, verify on `/blog`:
 - `background-image` contains `radial-gradient`.
 - links share one row.
 - each link reports `min-height: 44px`.
-- hovering one link brightens and underlines only that link.
+- hovering one link brightens only that command text and leaves the other command muted.
 - keyboard focus shows a dashed outline.
 
 At approximately `390 × 844`, verify:

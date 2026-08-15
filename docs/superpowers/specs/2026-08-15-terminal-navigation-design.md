@@ -77,7 +77,7 @@ the memorable detail is the dotted terminal exit, not a new color, glow, animati
 ## interaction
 
 - every command is a real internal link with the full command text as its hit target.
-- on hover, shift the command to the site's brighter text color and reveal a restrained underline or bottom rule.
+- on hover, shift only the command text from the site's muted gray to its brighter text color, without adding an underline or background highlight.
 - do not move, rotate, scale, glow, or highlight the entire strip on hover.
 - preserve a clear `:focus-visible` outline that works independently of color.
 - mark the current destination only when needed in the future; this iteration contains no self-links.

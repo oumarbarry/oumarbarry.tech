@@ -30,19 +30,19 @@ onBeforeUnmount(scheduler.cleanup)
 
     <dl v-if="stats">
       <div>
-        <dt>Protocol</dt>
+        <dt>Protocol:</dt>
         <dd>{{ stats.protocol }}</dd>
       </div>
       <div>
-        <dt>Transfer</dt>
+        <dt>Transfer:</dt>
         <dd>{{ stats.transfer }}</dd>
       </div>
       <div>
-        <dt>TTFB</dt>
+        <dt>TTFB:</dt>
         <dd>{{ stats.ttfb }}</dd>
       </div>
       <div>
-        <dt>Page load</dt>
+        <dt>Page load:</dt>
         <dd>{{ stats.duration }}</dd>
       </div>
     </dl>

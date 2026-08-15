@@ -143,6 +143,9 @@ test("registers the component cleanup during setup", async () => {
   )
 
   assert.match(source, /onMounted\(scheduler\.start\)\s+onBeforeUnmount\(scheduler\.cleanup\)/)
-  assert.match(source, /<dt>Protocol<\/dt>/)
+  assert.match(source, /<dt>Protocol:<\/dt>/)
+  assert.match(source, /<dt>Transfer:<\/dt>/)
+  assert.match(source, /<dt>TTFB:<\/dt>/)
+  assert.match(source, /<dt>Page load:<\/dt>/)
   assert.doesNotMatch(source, /Initial document|Navigation protocol/)
 })

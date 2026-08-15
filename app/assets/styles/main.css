@@ -50,7 +50,8 @@ a:hover {
   text-underline-offset: 0.22em;
 }
 
-.site-shell {
+.site-shell,
+.error-shell {
   min-height: 100dvh;
 }
 
@@ -71,59 +72,46 @@ a:hover {
   display: flex;
   min-height: 54px;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 0 1rem;
 }
 
-.site-brand,
-.site-nav a {
+.site-brand {
   display: inline-flex;
   min-height: 54px;
   align-items: center;
-  color: var(--muted);
+  color: var(--text);
   font-size: 0.88rem;
   font-weight: 650;
 }
 
-.site-brand {
-  color: var(--text);
-}
-
-.site-nav {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.site-nav a {
-  justify-content: center;
-}
-
-.nav-link {
-  padding: 0 0.1rem;
-}
-
-.icon-link {
-  color: var(--muted);
-}
-
-.site-brand:hover,
-.site-nav a:hover {
+.site-brand:hover {
   color: var(--text);
   text-decoration: none;
 }
 
+.status-badge {
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  padding: 0.16rem 0.32rem;
+  color: var(--dim);
+  font-size: 0.62rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
 .home-shell,
 .page-grid,
+.error-main,
 .site-footer {
   border-bottom: 1px solid var(--line);
 }
 
-.home-rails {
+.content-rails {
   padding: 6px;
 }
 
-.home-panel {
+.content-panel {
   border: 1px solid var(--line-strong);
   border-radius: 8px;
   background: var(--panel);
@@ -133,7 +121,8 @@ a:hover {
 .blog-header,
 .article-header,
 .article-body,
-.blog-list-wrap {
+.blog-list-wrap,
+.error-copy {
   width: min(100%, var(--content));
   margin: 0 auto;
   padding: 2.4rem 1.05rem;
@@ -142,6 +131,69 @@ a:hover {
 .home-copy {
   padding-top: 1.35rem;
   padding-bottom: 1.45rem;
+}
+
+.error-panel {
+  display: flex;
+  min-height: clamp(360px, 60dvh, 620px);
+  align-items: center;
+}
+
+.error-copy {
+  padding-top: clamp(3rem, 10vh, 6rem);
+  padding-bottom: clamp(3rem, 10vh, 6rem);
+}
+
+.error-code {
+  margin-bottom: 1rem;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  letter-spacing: -0.04em;
+}
+
+.error-code::before {
+  color: var(--dim);
+  content: "> ";
+}
+
+.error-message {
+  max-width: 34rem;
+}
+
+.error-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 1.25rem;
+  margin-top: 1.15rem;
+}
+
+.error-action {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  border: 0;
+  padding: 0;
+  color: var(--dim);
+  background: transparent;
+  font: inherit;
+  font-size: 0.9rem;
+  line-height: 1.35;
+  text-decoration: none;
+}
+
+.error-retry {
+  color: var(--text);
+}
+
+.error-action:hover {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.error-action:focus-visible {
+  border-radius: 2px;
+  outline: 1px solid var(--line-strong);
+  outline-offset: 4px;
 }
 
 .sr-only {
@@ -212,37 +264,79 @@ p + p {
 .contact-list,
 .post-list {
   margin: 0.85rem 0 0;
-  padding-left: 1.35rem;
   color: var(--muted);
   line-height: 1.82;
 }
 
-.contact-list a,
-.contact-muted {
-  display: inline-flex;
+.contact-list {
+  padding-left: 0;
+}
+
+.post-list {
+  padding-left: 1.35rem;
+}
+
+.contact-list li {
+  display: flex;
   align-items: center;
   gap: 0.45rem;
 }
 
-.contact-muted {
+.contact-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
   color: var(--muted);
+}
+
+.contact-handle,
+.contact-handle-link {
+  color: var(--dim);
 }
 
 .contact-list .iconify {
   color: var(--dim);
 }
 
-.contact-list a:hover .iconify {
+.contact-handle-link:hover {
   color: var(--muted);
+  text-decoration: none;
 }
 
-.blog-shell,
-.article-shell {
-  width: min(100%, var(--max));
-  min-height: calc(100dvh - 56px);
-  margin: 0 auto;
-  border-right: 1px solid var(--line);
-  border-left: 1px solid var(--line);
+.contact-handle-link:focus-visible {
+  border-radius: 2px;
+  outline: 1px dashed var(--dim);
+  outline-offset: 2px;
+}
+
+.home-destinations {
+  display: grid;
+  gap: 1.35rem;
+  margin-top: 2rem;
+  border-top: 1px solid var(--line);
+  padding-top: 1.5rem;
+}
+
+.destination-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.destination-link {
+  color: var(--text);
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.destination-link::before {
+  content: "> ";
+}
+
+.destination-copy {
+  margin-top: 0.35rem;
+  color: var(--dim);
+  font-size: 0.9rem;
 }
 
 .blog-header {
@@ -308,6 +402,7 @@ p + p {
 .perf-stats summary {
   display: inline-flex;
   align-items: center;
+  gap: 0.4rem;
   color: var(--text);
   font-size: 0.9rem;
   font-weight: 500;
@@ -320,19 +415,25 @@ p + p {
 }
 
 .perf-stats summary::before {
-  content: "▸";
-  margin-right: 0.15rem;
-  color: var(--muted);
+  width: 0.42rem;
+  height: 0.42rem;
+  border-right: 1.5px solid var(--muted);
+  border-bottom: 1.5px solid var(--muted);
+  content: "";
+  flex: 0 0 auto;
+  transform: rotate(-45deg);
+  transition: transform 120ms ease;
 }
 
 .perf-stats[open] summary::before {
-  content: "▾";
+  transform: rotate(45deg);
 }
 
 .perf-stats dl {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.55rem 1.5rem;
+  grid-template-columns: repeat(4, max-content);
+  gap: 1rem;
+  justify-content: space-between;
   margin: 0.85rem 0 0;
 }
 
@@ -340,13 +441,13 @@ p + p {
   display: flex;
   min-width: 0;
   align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 .perf-stats dt,
 .perf-stats dd {
   margin: 0;
+  white-space: nowrap;
 }
 
 .perf-stats dt {
@@ -366,35 +467,40 @@ p + p {
 
 @media (max-width: 900px) {
   .perf-stats dl {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.55rem 1.25rem;
+    justify-content: stretch;
+  }
+}
+
+@media (max-width: 520px) {
+  .perf-stats dl {
     grid-template-columns: 1fr;
     gap: 0.45rem;
+  }
+
+  .error-actions {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.15rem;
   }
 }
 
 @media (max-width: 760px) {
-  .site-rails,
-  .blog-shell,
-  .article-shell {
+  .site-rails {
     border-right: 0;
     border-left: 0;
   }
 
   .header-rails {
-    min-height: 52px;
     padding: 0 0.85rem;
   }
 
-  .site-brand,
-  .site-nav a {
-    min-height: 52px;
+  .site-brand {
     font-size: 0.8rem;
   }
 
-  .site-nav {
-    gap: 0.8rem;
-  }
-
-  .home-rails,
+  .content-rails,
   .footer-rails {
     padding: 6px;
   }
@@ -403,7 +509,8 @@ p + p {
   .blog-header,
   .article-header,
   .article-body,
-  .blog-list-wrap {
+  .blog-list-wrap,
+  .error-copy {
     padding-right: 1rem;
     padding-left: 1rem;
   }

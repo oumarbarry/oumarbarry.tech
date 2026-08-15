@@ -23,7 +23,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <details class="perf-stats">
+  <details class="perf-stats" open>
     <summary>Perf Stats</summary>
 
     <dl v-if="stats">

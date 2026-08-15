@@ -316,15 +316,31 @@ p + p {
   border-top: 1px solid var(--line);
 }
 
-.home-editorial-link {
+.home-editorial-item {
   display: grid;
   gap: 0.3rem;
   border-bottom: 1px solid var(--line);
   padding: 0.9rem 0;
 }
 
-.home-editorial-link:hover {
+.home-editorial-command {
+  justify-self: start;
+}
+
+.home-editorial-command:hover {
   text-decoration: none;
+}
+
+.home-editorial-command:hover .home-editorial-title {
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 0.22em;
+}
+
+.home-editorial-command:focus-visible {
+  border-radius: 2px;
+  outline: 1px dashed var(--dim);
+  outline-offset: 3px;
 }
 
 .home-editorial-heading {
@@ -343,10 +359,6 @@ p + p {
   color: var(--dim);
   font-size: 0.8rem;
   line-height: 1.55;
-}
-
-.home-editorial-link:hover .home-editorial-description {
-  color: var(--muted);
 }
 
 .blog-shell,

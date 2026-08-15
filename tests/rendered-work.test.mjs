@@ -37,6 +37,20 @@ test("rendered home and work pages share a centered brand-only header", async ()
   assert.match(home, /href="https:\/\/github\.com\/oumarbarry"/i)
 })
 
+test("home links only the terminal commands, not their supporting copy", async () => {
+  const home = await readFile(renderedHome, "utf8")
+  const workLink = home.match(/<a href="\/work"[^>]*>[\s\S]*?<\/a>/i)?.[0]
+  const blogLink = home.match(/<a href="\/blog"[^>]*>[\s\S]*?<\/a>/i)?.[0]
+
+  assert.ok(workLink)
+  assert.match(workLink, /&gt; cd \/work/i)
+  assert.doesNotMatch(workLink, /some of the stuff i've built/i)
+
+  assert.ok(blogLink)
+  assert.match(blogLink, /&gt; cd \/blog/i)
+  assert.doesNotMatch(blogLink, /notes on tech, manga/i)
+})
+
 test("prerendered blog and work pages expose their terminal exits", async () => {
   const [blog, work] = await Promise.all([
     readFile(renderedBlog, "utf8"),

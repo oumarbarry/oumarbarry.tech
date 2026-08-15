@@ -4,7 +4,7 @@
 
 **Goal:** Add the approved terminal-style navigation commands to home, blog, article, and work pages while preserving the existing centered header, editorial copy, badges, and footer.
 
-**Architecture:** Create one stateless `TerminalNav.vue` component with a typed `items` prop. Route pages provide small immutable command arrays; the home page keeps its richer editorial navigation and changes only its two command labels. Test user-visible navigation through Nuxt's prerendered HTML, then verify the responsive visual contract through computed styles in a real browser.
+**Architecture:** Create one stateless `TerminalNav.vue` component with a typed `items` prop. Route pages provide small immutable command arrays; the home page keeps its richer editorial navigation, presents its two destinations as shell commands, and limits each link to the command itself. Test user-visible navigation through Nuxt's prerendered HTML, then verify the responsive visual contract through computed styles in a real browser.
 
 **Tech Stack:** Nuxt 4, Vue 3 `<script setup lang="ts">`, `NuxtLink`, scoped CSS, Bun, Node's built-in test runner.
 

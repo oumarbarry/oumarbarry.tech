@@ -77,24 +77,28 @@
           </ul>
 
           <nav class="home-editorial-nav" aria-label="Explore this site">
-            <NuxtLink to="/work" class="home-editorial-link">
+            <div class="home-editorial-item">
               <span class="home-editorial-heading">
-                <span class="home-editorial-title">&gt; cd /work</span>
+                <NuxtLink to="/work" class="home-editorial-command">
+                  <span class="home-editorial-title">&gt; cd /work</span>
+                </NuxtLink>
                 <span class="status-badge">building</span>
               </span>
               <span class="home-editorial-description">
                 some of the stuff i've built and the problems i ran into along the way.
               </span>
-            </NuxtLink>
-            <NuxtLink to="/blog" class="home-editorial-link">
+            </div>
+            <div class="home-editorial-item">
               <span class="home-editorial-heading">
-                <span class="home-editorial-title">&gt; cd /blog</span>
+                <NuxtLink to="/blog" class="home-editorial-command">
+                  <span class="home-editorial-title">&gt; cd /blog</span>
+                </NuxtLink>
                 <span class="status-badge">soon</span>
               </span>
               <span class="home-editorial-description">
                 notes on tech, manga, and whatever else is on my mind.
               </span>
-            </NuxtLink>
+            </div>
           </nav>
         </article>
       </section>

@@ -23,7 +23,7 @@ retain the current editorial navigation, descriptions, and status badges. change
 - `> cd /work` with the existing `building` badge and work description.
 - `> cd /blog` with the existing `soon` badge and blog description.
 
-the whole editorial destination remains one link, matching the current interaction model.
+only the shell command is a link. the status badge and supporting description stay non-interactive, so hover and focus feedback remain limited to the actual destination.
 
 ### blog index
 

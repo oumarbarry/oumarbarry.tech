@@ -1,6 +1,11 @@
 <script setup lang="ts">
 const route = useRoute()
 
+const terminalItems = [
+  { label: "> cd ..", to: "/blog" },
+  { label: "> cd /work", to: "/work" },
+] as const
+
 const { data: post } = await useAsyncData(`blog-${route.path}`, () => {
   return queryCollection("blog").path(route.path).first()
 })
@@ -38,6 +43,7 @@ useSeoMeta({
         </header>
 
         <ContentRenderer :value="post" class="article-body" />
+        <TerminalNav :items="terminalItems" />
       </article>
     </div>
   </main>

@@ -4,6 +4,7 @@ import test from "node:test"
 
 const renderedPage = new URL("../.output/public/work/index.html", import.meta.url)
 const renderedHome = new URL("../.output/public/index.html", import.meta.url)
+const renderedBlog = new URL("../.output/public/blog/index.html", import.meta.url)
 const renderedResume = new URL("../.output/public/oumar-barry-resume.pdf", import.meta.url)
 const renderedOgImage = new URL("../.output/public/work-og.png", import.meta.url)
 const renderedSitemap = new URL("../.output/public/sitemap.xml", import.meta.url)
@@ -27,13 +28,35 @@ test("rendered home and work pages share a centered brand-only header", async ()
   assert.match(home, /<nav class="home-editorial-nav"[^>]*>/i)
   assert.match(
     home,
-    /href="\/work"[\s\S]*?&gt; work[\s\S]*?some of the stuff i&#39;ve built and the problems i ran into along the way\./i,
+    /href="\/work"[\s\S]*?&gt; cd \/work[\s\S]*?some of the stuff i&#39;ve built and the problems i ran into along the way\./i,
   )
   assert.match(
     home,
-    /href="\/blog"[\s\S]*?&gt; blog[\s\S]*?notes on tech, manga, and whatever else is on my mind\./i,
+    /href="\/blog"[\s\S]*?&gt; cd \/blog[\s\S]*?notes on tech, manga, and whatever else is on my mind\./i,
   )
   assert.match(home, /href="https:\/\/github\.com\/oumarbarry"/i)
+})
+
+test("prerendered blog and work pages expose their terminal exits", async () => {
+  const [blog, work] = await Promise.all([
+    readFile(renderedBlog, "utf8"),
+    readFile(renderedPage, "utf8"),
+  ])
+
+  const blogNav = blog.match(
+    /<nav[^>]*class="[^"]*terminal-nav[^"]*"[^>]*aria-label="terminal navigation"[^>]*>[\s\S]*?<\/nav>/i,
+  )?.[0]
+  const workNav = work.match(
+    /<nav[^>]*class="[^"]*terminal-nav[^"]*"[^>]*aria-label="terminal navigation"[^>]*>[\s\S]*?<\/nav>/i,
+  )?.[0]
+
+  assert.ok(blogNav)
+  assert.match(blogNav, /href="\/"[^>]*>[\s\S]*?&gt; cd \.\./i)
+  assert.match(blogNav, /href="\/work"[^>]*>[\s\S]*?&gt; cd \/work/i)
+
+  assert.ok(workNav)
+  assert.match(workNav, /href="\/"[^>]*>[\s\S]*?&gt; cd \.\./i)
+  assert.match(workNav, /href="\/blog"[^>]*>[\s\S]*?&gt; cd \/blog/i)
 })
 
 test("prerendered work page contains the five-act public portfolio", async () => {

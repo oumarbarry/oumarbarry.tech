@@ -79,7 +79,7 @@
           <nav class="home-editorial-nav" aria-label="Explore this site">
             <NuxtLink to="/work" class="home-editorial-link">
               <span class="home-editorial-heading">
-                <span class="home-editorial-title">&gt; work</span>
+                <span class="home-editorial-title">&gt; cd /work</span>
                 <span class="status-badge">building</span>
               </span>
               <span class="home-editorial-description">
@@ -88,7 +88,7 @@
             </NuxtLink>
             <NuxtLink to="/blog" class="home-editorial-link">
               <span class="home-editorial-heading">
-                <span class="home-editorial-title">&gt; blog</span>
+                <span class="home-editorial-title">&gt; cd /blog</span>
                 <span class="status-badge">soon</span>
               </span>
               <span class="home-editorial-description">

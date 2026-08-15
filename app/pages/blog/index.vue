@@ -3,6 +3,11 @@ const { data: posts } = await useAsyncData("blog-posts", () => {
   return queryCollection("blog").where("draft", "=", false).order("date", "DESC").all()
 })
 
+const terminalItems = [
+  { label: "> cd ..", to: "/" },
+  { label: "> cd /work", to: "/work" },
+] as const
+
 useSeoMeta({
   title: "Blog",
   description: "Blog - Oumar Barry.",
@@ -45,6 +50,8 @@ defineOgImage("Oumar", {
 
           <p v-else class="muted">nothing here yet. i'm working on the first post.</p>
         </div>
+
+        <TerminalNav :items="terminalItems" />
       </section>
     </div>
   </main>

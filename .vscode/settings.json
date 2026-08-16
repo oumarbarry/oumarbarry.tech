@@ -2,7 +2,16 @@
   "prettier.enable": false,
   "editor.formatOnSave": false,
   "editor.defaultFormatter": "oxc.oxc-vscode",
-  "oxc.fmt.configPath": ".oxfmtrc.json",
+  "oxc.fmt.configPath": "oxfmt.config.ts",
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/.nuxt": true,
+    "**/.output": true,
+    "**/dist": true,
+    "**/.agents": true,
+    "**/.claude/skills": true
+  },
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "never"

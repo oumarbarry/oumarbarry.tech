@@ -93,7 +93,6 @@ export default defineNuxtConfig({
     enabled: true,
     zeroRuntime: true,
     defaults: {
-      component: "Oumar",
       width: 1200,
       height: 630,
       cacheMaxAgeSeconds: 60 * 60 * 24 * 7,

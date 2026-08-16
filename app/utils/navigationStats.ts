@@ -36,20 +36,20 @@ const isNonNegativeNumber = (value: unknown): value is number =>
   typeof value === "number" && Number.isFinite(value) && value >= 0
 
 export function formatNavigationStats(navigation: NavigationTimingLike): NavigationStats {
+  const { transferSize, requestStart, responseStart } = navigation
+
   const protocol = formatProtocol(navigation.nextHopProtocol)
 
   const transfer =
-    Number.isSafeInteger(navigation.transferSize) && navigation.transferSize >= 0
-      ? `${navigation.transferSize} bytes`
+    isNonNegativeNumber(transferSize) && Number.isSafeInteger(transferSize)
+      ? `${transferSize} bytes`
       : unavailable
 
   const hasValidTtfb =
-    isNonNegativeNumber(navigation.requestStart) &&
-    isNonNegativeNumber(navigation.responseStart) &&
-    navigation.responseStart >= navigation.requestStart
-  const ttfb = hasValidTtfb
-    ? formatMilliseconds(navigation.responseStart - navigation.requestStart)
-    : unavailable
+    isNonNegativeNumber(requestStart) &&
+    isNonNegativeNumber(responseStart) &&
+    responseStart >= requestStart
+  const ttfb = hasValidTtfb ? formatMilliseconds(responseStart - requestStart) : unavailable
 
   const duration = isNonNegativeNumber(navigation.duration)
     ? formatMilliseconds(navigation.duration)

@@ -36,6 +36,7 @@
 ### Task 1: Add the Real Navigation Behavior
 
 **Files:**
+
 - Create: `app/components/TerminalNav.vue`
 - Modify: `app/pages/index.vue:79-103`
 - Modify: `app/pages/blog/index.vue:1-48`
@@ -45,6 +46,7 @@
 - Modify: `tests/rendered-work.test.mjs:5-39`
 
 **Interfaces:**
+
 - Consumes: Nuxt's auto-imported `NuxtLink`.
 - Produces: auto-imported `<TerminalNav :items="terminalItems" />`, where `items` is `readonly { command: string; to: string }[]`.
 - Emits: nothing. The component has no local state, effects, or composables.
@@ -204,10 +206,12 @@ git commit -m "Add terminal navigation across pages"
 ### Task 2: Apply and Verify the Approved Visual Treatment
 
 **Files:**
+
 - Modify: `app/components/TerminalNav.vue`
 - Modify: `app/assets/styles/main.css:409-413`
 
 **Interfaces:**
+
 - Consumes: the semantic component and route integration from Task 1.
 - Produces: dotted, motionless, responsive styling using existing CSS variables only.
 

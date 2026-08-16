@@ -40,7 +40,7 @@ useSeoMeta({
 
 defineOgImage("Oumar", {
   title,
-  description: "oumarbarry.tech",
+  description: "Developer aka Problem solver",
   siteName: "oumarbarry.tech",
 })
 </script>

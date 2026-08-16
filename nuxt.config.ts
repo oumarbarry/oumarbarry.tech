@@ -23,6 +23,7 @@ export default defineNuxtConfig({
 
   modules: [
     "@nuxt/eslint",
+    "@nuxt/fonts",
     "@nuxtjs/seo",
     "@nuxt/scripts",
     "@nuxt/content",
@@ -31,6 +32,15 @@ export default defineNuxtConfig({
     "@vueuse/nuxt",
     "@unocss/nuxt",
   ],
+
+  // global: true is required for the OG image renderer to see the font data
+  fonts: {
+    defaults: {
+      subsets: ["latin"],
+      styles: ["normal"],
+    },
+    families: [{ name: "IBM Plex Mono", weights: [400, 500, 600, 700], global: true }],
+  },
 
   site: {
     url: "https://oumarbarry.tech",

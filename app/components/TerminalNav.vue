@@ -36,6 +36,7 @@ defineProps<{
 .terminal-nav-list {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 0.25rem 1.5rem;
   margin: 0;
   padding: 0;

@@ -11,12 +11,9 @@ defineProps<{
     class="flex h-full w-full flex-col justify-between px-18 py-16 text-white"
     style="
       background: #050605;
+      /* the renderer only ships IBM Plex Mono — extra fallbacks just trigger font downloads */
       font-family:
         IBM Plex Mono,
-        SFMono-Regular,
-        Cascadia Code,
-        Menlo,
-        Consolas,
         monospace;
     "
   >

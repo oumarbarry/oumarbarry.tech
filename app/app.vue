@@ -27,7 +27,7 @@ useSeoMeta({
   ogTitle: title,
   ogDescription: description,
   ogType: "website",
-  ogUrl: "https://oumarbarry.tech",
+  ogUrl: "https://www.oumarbarry.tech",
   ogSiteName: title,
   ogLocale: "en_US",
   twitterCard: "summary_large_image",

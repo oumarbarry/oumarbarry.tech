@@ -201,16 +201,43 @@ test("rendered client assets provide an open performance panel with unambiguous 
 test("prerendered work page preserves SEO and downloadable assets", async () => {
   const html = await readFile(renderedPage, "utf8")
 
-  assert.match(html, /property="og:image" content="https:\/\/oumarbarry\.tech\/work-og\.png"/i)
+  assert.match(html, /property="og:image" content="https:\/\/www\.oumarbarry\.tech\/work-og\.png"/i)
   assert.match(html, /property="og:image:width" content="1200"/i)
   assert.match(html, /property="og:image:height" content="630"/i)
   assert.match(html, /name="twitter:image:alt" content="Oumar Barry - Selected Work"/i)
   assert.match(html, /name="twitter:card" content="summary_large_image"/i)
 
   const sitemap = await readFile(renderedSitemap, "utf8")
-  assert.match(sitemap, /<loc>https:\/\/oumarbarry\.tech\/work<\/loc>/)
+  assert.match(sitemap, /<loc>https:\/\/www\.oumarbarry\.tech\/work<\/loc>/)
   await Promise.all([
     assert.rejects(access(renderedResume), { code: "ENOENT" }),
     access(renderedOgImage),
   ])
+})
+
+test("prerendered SEO consistently uses the www canonical host", async () => {
+  const [home, work, blog, sitemap] = await Promise.all([
+    readFile(renderedHome, "utf8"),
+    readFile(renderedPage, "utf8"),
+    readFile(renderedBlog, "utf8"),
+    readFile(renderedSitemap, "utf8"),
+  ])
+
+  for (const [html, path] of [
+    [home, "/"],
+    [work, "/work"],
+    [blog, "/blog"],
+  ]) {
+    assert.match(
+      html,
+      new RegExp(
+        `<link rel="canonical" href="https://www\\.oumarbarry\\.tech${path === "/" ? "/" : path}">`,
+        "i",
+      ),
+    )
+    assert.match(html, /"@type":"Person"[^<]*"url":"https:\/\/www\.oumarbarry\.tech"/i)
+  }
+
+  assert.match(home, /property="og:url" content="https:\/\/www\.oumarbarry\.tech"/i)
+  assert.doesNotMatch(sitemap, /<loc>https:\/\/oumarbarry\.tech\//)
 })

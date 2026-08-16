@@ -16,15 +16,15 @@ useSeoMeta({
   ogTitle: `${title} - Oumar Barry`,
   ogDescription: description,
   ogType: "profile",
-  ogUrl: "https://oumarbarry.tech/work",
-  ogImage: "https://oumarbarry.tech/work-og.png",
+  ogUrl: "https://www.oumarbarry.tech/work",
+  ogImage: "https://www.oumarbarry.tech/work-og.png",
   ogImageAlt: "Oumar Barry - Selected Work",
   ogImageWidth: 1200,
   ogImageHeight: 630,
   twitterCard: "summary_large_image",
   twitterTitle: `${title} - Oumar Barry`,
   twitterDescription: description,
-  twitterImage: "https://oumarbarry.tech/work-og.png",
+  twitterImage: "https://www.oumarbarry.tech/work-og.png",
   twitterImageAlt: "Oumar Barry - Selected Work",
 })
 

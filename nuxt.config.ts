@@ -43,7 +43,7 @@ export default defineNuxtConfig({
   },
 
   site: {
-    url: "https://oumarbarry.tech",
+    url: "https://www.oumarbarry.tech",
     name: "Oumar Barry",
     description:
       "Oumar Barry is a software architect building AI products, developer platforms and infrastructure from Conakry, Guinea.",
@@ -64,7 +64,6 @@ export default defineNuxtConfig({
       ogType: "website",
     },
     fallbackTitle: true,
-    redirectToCanonicalSiteUrl: true,
   },
 
   sitemap: {
@@ -89,7 +88,7 @@ export default defineNuxtConfig({
     identity: {
       type: "Person",
       name: "Oumar Barry",
-      url: "https://oumarbarry.tech",
+      url: "https://www.oumarbarry.tech",
       email: "oumar379@proton.me",
       sameAs: [
         "https://github.com/oumarbarry",
@@ -149,7 +148,7 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     public: {
-      siteUrl: "https://oumarbarry.tech",
+      siteUrl: "https://www.oumarbarry.tech",
     },
   },
 

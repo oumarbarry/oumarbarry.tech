@@ -17,7 +17,7 @@ export default defineNuxtConfig({
     },
   },
 
-  css: ["@unocss/reset/tailwind.css", "~/assets/styles/main.css"],
+  css: ["~/assets/styles/main.css"],
 
   experimental: { componentIslands: true },
 
